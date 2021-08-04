@@ -22,11 +22,12 @@ public class C206_CaseStudy {
 		// Tuition Timetable List (Dexter)
 		regTimetableList.add(new TimetableRegistration(1, 1, "20043405@myrp.edu.sg", "Pending", LocalDateTime.now()));
 				
-		// Objects for tuition information
+		// Objects for tuition information (ANDERS)
 		Tuition t1 = new Tuition("ABC001", "Tuition_Test1", "Subject1", "This is for testing", 123, "Pre Requisite");
 		Tuition t2 = new Tuition("XYZ002", "Tuition_Test2", "Subject2", "This is for testing", 456, "Pre Requisite");
 		tuitionList.add(t1);
 		tuitionList.add(t2);
+		
 		// Objects for tuition timetable
 				
 		// Objects for teacher
@@ -70,6 +71,30 @@ public class C206_CaseStudy {
 
 			} else if (option == OPTION_INFORMATION) {
 				// Manage Tuition Information
+				tuitionMenu();
+				int infoOption = Helper.readInt("Enter option to choose > ");
+					switch(infoOption) {
+					case 1:
+						// Add Tuition Information
+						addTutionInformation();						
+						break;
+					case 2:
+						// View All Tuition Information
+						viewAllTuitionInformation();
+						break;
+					case 3:
+						// Delete Tuition Information
+						deleteTuitionInformation();
+						break;
+					case 4:
+						// Quit
+						System.out.println("Leaving Tuition Information Management......");
+						break;
+					default:
+						System.out.println("Invalid Option Entered");
+						break;
+					}
+				
 
 			} else if (option == OPTION_TIMETABLE) {
 				// Manage Tuition Timetable Information
@@ -201,8 +226,71 @@ public class C206_CaseStudy {
 		return isFound;
 	}
 
+	// --------------- ANDERS --------------
 	// Manage Tuition Information Menu (Option 3)
+	// Display Menu Options
+	public static void tuitionMenu() {
+		C206_CaseStudy.setHeader("TUITION INFORMATION MANAGEMENT");
+		System.out.println("1. Add Tuition Information");
+		System.out.println("2. View All Tuition Information");
+		System.out.println("3. Delete Tuition Information");
+		System.out.println("4. Leave Tuition Information Management");
+		Helper.line(80, "-");
+	}
+	
+	// Add Tuition Information
+	public static void addTutionInformation() {
+		String TuitionCode = Helper.readString("Enter new tuition code > ");
+		String TuitionTitle = Helper.readString("Enter new tuition title > ");
+		String SubjectName = Helper.readString("Enter subject name > ");
+		String Description = Helper.readString("Enter tuition description > ");
+		double Duration = Helper.readDouble("Enter tuition duration > ");
+		String preRequisite = Helper.readString("Enter preRequisite > ");
+		Tuition nTuition = new Tuition(TuitionCode, TuitionTitle, SubjectName, Description, Duration, preRequisite);
+		tuitionList.add(nTuition);
+	}
+	
+	// View All Tuition Information
+	public static void viewAllTuitionInformation() {
+		String tInfo = String.format("%-15s %-20s %-15s %-23s %-10s %-10s\n","TUITION CODE", "TUITION TITLE", "SUBJECT NAME", "DESCRIPTION","DURATION","PRE-REQUISITE");
+		for (int i = 0; i < tuitionList.size(); i ++) {
+			Tuition t = tuitionList.get(i);
+			tInfo += String.format("%-15s %-20s %-15s %-23s %-10.2f %-10s\n",t.getTuitionCode(),t.getTuitionTitle(),t.getSubjectName(), 
+					t.getTuitionDescription(),t.getDuration(),t.getPreRequisite());
+		}
+		System.out.println(tInfo);
+	}
 
+	// Delete Tuition Information
+	public static void deleteTuitionInformation() {
+		boolean found = false;
+		String tuitionD = "";
+		String delete = Helper.readString("Enter Tuition Code to delete > ");
+		for (int i = 0; i < tuitionList.size(); i++) {
+			if (delete.equals(tuitionList.get(i).getTuitionCode())) {
+				found = true;
+				tuitionD = tuitionList.get(i).getTuitionCode();
+				char confirm = Helper.readChar("Are you sure you want to delete " + tuitionD + " (Y/N) ? > ");
+				
+				if((confirm == 'y') || (confirm == 'Y')) {
+					tuitionList.remove(tuitionList.get(i));
+					System.out.println(tuitionD + "has successfully been deleted!");
+					
+				}else if ((confirm == 'n') || (confirm == 'N')) {
+					System.out.println(tuitionD + " will not be deleted.");
+					
+				}else {
+					System.out.println("Please enter a valid option");
+				}
+				break;
+			}
+		}
+		if(!found) {
+			System.out.println("The tuition code you entered cannot be found. Please try again.");
+		}
+	}
+	// ------------------------------------
+	
 	// Manage Tuition Timetable Menu (Option 4)
 
 	// Manage Tuition Teachers Menu (Option 5) JJ
