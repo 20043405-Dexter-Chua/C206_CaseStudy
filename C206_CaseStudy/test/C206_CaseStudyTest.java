@@ -99,11 +99,13 @@ public class C206_CaseStudyTest {
 	public void addStudentTest() {
 		
 		// boundary
-		assertNotNull("Check if there is valid Camcorder arraylist to add to", studentList);
+		assertNotNull("Check if there is valid Student arraylist to add to", studentList);
 		
 		// normal
 		C206_CaseStudy.addStudent(studentList, s1);
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
+		
+		//normal
 		assertSame("Check that Student is added", s1, studentList.get(0));
 				
 	} // addStudentTest
