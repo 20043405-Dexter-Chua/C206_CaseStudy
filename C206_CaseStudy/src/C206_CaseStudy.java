@@ -1,4 +1,3 @@
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -11,10 +10,26 @@ public class C206_CaseStudy {
 	private static final int OPTION_QUIT = 6;
 	
 	private static final ArrayList<TimetableRegistration> regTimetableList = new ArrayList<TimetableRegistration>();
+	private static final ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
 
 	public static void main(String[] args) {
+		
+		// Objects for testing
+		
+		// Objects for student
+				
+		// Objects for registration
 		// Tuition Timetable List (Dexter)
 		regTimetableList.add(new TimetableRegistration(1, 1, "20043405@myrp.edu.sg", "Pending", LocalDateTime.now()));
+				
+		// Objects for tuition information
+		Tuition t1 = new Tuition("ABC001", "Tuition_Test1", "Subject1", "This is for testing", 123, "Pre Requisite");
+		Tuition t2 = new Tuition("XYZ002", "Tuition_Test2", "Subject2", "This is for testing", 456, "Pre Requisite");
+		tuitionList.add(t1);
+		tuitionList.add(t2);
+		// Objects for tuition timetable
+				
+		// Objects for teacher
 
 		int option = -1;
 
