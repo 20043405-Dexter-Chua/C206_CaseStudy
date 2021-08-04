@@ -14,13 +14,22 @@ public class C206_CaseStudyTest {
 	private TimetableRegistration tt2;
 	private ArrayList<TimetableRegistration> regTimetableList;
 	
+	//Nicolette
+	private StudentInfo s1;
+	private ArrayList<StudentInfo> studentList;
+	
 	@Before
 	public void setUp() throws Exception {
+			
 		// TuitionTimetable Test [Dexter]
 		tt1 = new TimetableRegistration(1, 1, "dchua647@gmail.com", "Pending", LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
 		tt2 = new TimetableRegistration(2, 1, "dtan746@gmail.com", "Pending", LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
 		
 		regTimetableList = new ArrayList<TimetableRegistration>();	
+		
+		// Nicolette
+		s1 = new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore");
+		studentList = new ArrayList<StudentInfo>();
 	}
 
 	// Timetable Test [Dexter]
@@ -86,6 +95,58 @@ public class C206_CaseStudyTest {
 		
 	}
 	
+	//Student test [Nicolette]
+	public void addStudentTest() {
+		
+		// boundary
+		assertNotNull("Check if there is valid Camcorder arraylist to add to", studentList);
+		
+		// normal
+		C206_CaseStudy.addStudent(studentList, s1);
+		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
+		assertSame("Check that Student is added", s1, studentList.get(0));
+				
+	} // addStudentTest
+	
+	public void viewStudentTest() {
+		
+		// boundary
+		assertNotNull("Test if there is valid Student arraylist to retrieve student's information", studentList);
+				
+		//test if the list of students retrieved from the SourceCentre is empty - boundary
+		String allStudent = C206_CaseStudy.retrieveStudent(studentList);
+		String testOutput = "";
+		assertEquals("Check viewStudent", testOutput, allStudent);
+				
+		// normal
+		C206_CaseStudy.addStudent(studentList, s1);
+		assertEquals("Test that Student arraylist size is 1", 1, studentList.size());
+				
+		// normal	
+		allStudent = C206_CaseStudy.retrieveStudent(studentList);
+		testOutput += String.format("\n%-10s %-10c %-10d %-15s %-15s %-10s", "Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore");
+			
+		assertEquals("Test that ViewAllCamcorderlist", testOutput, allStudent);
+				
+	} // viewStudentTest
+	
+	public void deleteStudentTest() {
+		
+		// normal
+		assertNotNull("Test if there is valid Student arraylist", studentList);
+		C206_CaseStudy.deleteStudent(studentList);
+		
+		// normal 
+		Boolean ok = C206_CaseStudy.deleteStudent(studentList);
+		assertTrue("Test if student's information is deleted", ok);
+		
+		// error 
+		ok = C206_CaseStudy.deleteStudent(studentList);
+		assertFalse("Test if same information is not deleted again", ok);	
+		
+	} // deleteStudentTest
+	
+	
 	@After
 	public void tearDown() throws Exception {
 		// Timetable Test [Dexter]
@@ -93,6 +154,9 @@ public class C206_CaseStudyTest {
 		tt2 = null;
 		regTimetableList = null;
 		
+		//Student Test [Nicolette]
+		s1 = null;
+		studentList = null;
 	}
 
 }

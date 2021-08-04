@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
+
 	private static final int OPTION_ACCOUNT = 1;
 	private static final int OPTION_REGISTRATION = 2;
 	private static final int OPTION_INFORMATION = 3;
@@ -11,14 +12,23 @@ public class C206_CaseStudy {
 	
 	private static final ArrayList<TimetableRegistration> regTimetableList = new ArrayList<TimetableRegistration>();
 	private static final ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
+	
+	// Nicolette
+	private static final int STUDENT_ADD = 1;
+	private static final int STUDENT_VIEW = 2;
+	private static final int STUDENT_DELETE = 3;
+	private static final int STUDENT_QUIT = 4;
+	
+	private static final ArrayList<StudentInfo> studentList = new ArrayList<StudentInfo>();
 
 	public static void main(String[] args) {
-		
 		// Objects for testing
 		
 		// Objects for student
+		studentList.add(new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore"));
 				
 		// Objects for registration
+		
 		// Tuition Timetable List (Dexter)
 		regTimetableList.add(new TimetableRegistration(1, 1, "20043405@myrp.edu.sg", "Pending", LocalDateTime.now()));
 				
@@ -30,7 +40,7 @@ public class C206_CaseStudy {
 		// Objects for tuition timetable
 				
 		// Objects for teacher
-
+	
 		int option = -1;
 
 		while (option != OPTION_QUIT) {
@@ -39,8 +49,39 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter an Option: ");
 
 			if (option == OPTION_ACCOUNT) {
-				// Manage Account
-
+				// Manage Account				
+					
+					int choice = 0;
+					
+					while (option != STUDENT_QUIT) {
+						
+						C206_CaseStudy.menu();
+						choice = Helper.readInt("Enter an option > ");
+						
+						if (choice == STUDENT_ADD) {
+							// Add student
+							StudentInfo sss = inputStudent();
+							C206_CaseStudy.addStudent(studentList, sss);
+							
+						} else if (choice == STUDENT_VIEW) {
+							// View student
+							C206_CaseStudy.viewStudent(studentList);
+							
+						} else if (choice == STUDENT_DELETE) {
+							// Delete student
+							C206_CaseStudy.deleteStudent(studentList);
+							
+						} else if (choice == STUDENT_QUIT) {
+							// Quit
+							System.out.println("Goodbye");
+							
+						} else {
+							System.out.println("Invalid option!");
+							
+						} // else
+						
+					} // while
+					
 			} else if (option == OPTION_REGISTRATION) {
 				// Manage Tuition Registration
 				C206_CaseStudy.registerTypeMenu();
@@ -88,7 +129,6 @@ public class C206_CaseStudy {
 
 			}
 		}
-
 	}
 
 	public static void mainMenu() {
@@ -107,8 +147,113 @@ public class C206_CaseStudy {
 		System.out.println(header);
 		Helper.line(120, "=");
 	}
-	// Manage Student Account Menu (Option 1)
+	// Manage Student Account Menu (Option 1) [Nicolette]
+	private static void menu() {
+		
+		Helper.line(50, "-");
+		System.out.println("1. Add student");
+		System.out.println("2. View student");
+		System.out.println("3. Delete student");
+		System.out.println("4. Quit");
+		Helper.line(50, "-");
+		
+	}
+	
+	public static boolean deleteStudent(ArrayList<StudentInfo> studentList) {
+		// TODO Auto-generated method stub
+		Helper.line(50, "-");
+		System.out.println("DELETE STUDENT");
+		Helper.line(50, "-");
+		
+		String delete = Helper.readString("Enter the email of the student you want to delete > ");
+		
+		boolean isValid = deleteStudent(studentList, delete);
+		
+		if (isValid == false) {
+			
+			System.out.println("There is no such students");
+			
+		} else {
+			
+			System.out.println("Student is successfully deleted!");
+			
+		} // else		
+		return isValid;
+		
+	} // delete student void 
 
+	
+	private static boolean deleteStudent(ArrayList<StudentInfo> studentList, String delete) {
+		// TODO Auto-generated method stub
+		boolean isValid = false;
+		
+		for (int i = 0; i < studentList.size(); i++) {
+			
+			String sEmail = studentList.get(i).getEmail();
+			
+			if (delete.equals(sEmail)) {
+				
+				studentList.remove(i);
+				isValid = true;
+				
+			} // if
+			
+		} // for
+		
+		return isValid;
+		
+	} // delete student boolean
+
+	public static String retrieveStudent(ArrayList<StudentInfo> studentList) {
+		// TODO Auto-generated method stub
+		Helper.line(50, "-");
+		System.out.println("STUDENT LIST");
+		Helper.line(50, "-");
+		
+			String output = "";
+
+			for (int i = 0; i < studentList.size(); i++) {
+
+				output += String.format("%-100s \n", studentList.get(i).displayOutput());
+				
+			} // for
+			
+			return output; 
+	}
+		public static String viewStudent(ArrayList<StudentInfo> studentList) {
+		
+			String output = String.format("%-10s %-10s %-10s %-15s %-15s %-10s",
+										  "NAME", "GENDER", "MOBILE", "EMAIL", 
+										  "DATE OF BIRTH", "COUNTRY OF RESIDENCE");
+			 output += retrieveStudent(studentList);	
+			System.out.println(output);
+			return output;
+		
+	} // viewStudent
+
+	public static StudentInfo inputStudent() {
+		// TODO Auto-generated method stub
+		Helper.line(50, "-");
+		System.out.println("ADD NEW STUDENT");
+		Helper.line(50, "-");
+		
+		String Name = Helper.readString("Enter your name > ");
+		char Gender = Helper.readChar("Enter your gender (F/M) > ");
+		int Mobile = Helper.readInt("Enter your mobile number > ");
+		String Email = Helper.readString("Enter your email > ");
+		String DOB = Helper.readString("Enter your date of brith > ");
+		String COR = Helper.readString("Enter your country of residence > ");
+		
+		StudentInfo sss = new StudentInfo (Name, Gender, Mobile, Email, DOB, COR);
+		return sss;
+	} // input student
+	
+	public static void addStudent(ArrayList<StudentInfo> studentList, StudentInfo sss) {
+		
+		studentList.add(sss);
+		System.out.println("Student successfully added! ");
+		
+	} // add student
 	
 	// Manage Tuition Registration Menu (Option 2) [Dexter]
 	public static void registerTypeMenu() {
