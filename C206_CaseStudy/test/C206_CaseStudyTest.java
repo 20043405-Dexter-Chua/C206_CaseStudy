@@ -95,7 +95,7 @@ public class C206_CaseStudyTest {
 		
 	}
 	
-	//Student test [Nicolette]
+	//Student test [Nicolette]-
 	public void addStudentTest() {
 		
 		// boundary

@@ -24,7 +24,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// Objects for testing
 		
-		// Objects for student
+		// Objects for student-
 		studentList.add(new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore"));
 				
 		// Objects for registration

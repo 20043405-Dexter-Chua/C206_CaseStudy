@@ -32,7 +32,7 @@ public class StudentInfo {
 		this.email = email;
 		this.dob = dob;
 		this.cor = cor;
-	}
+	} //
 
 	public String displayOutput() {
 		String output = String.format("\n%-10s %-10c %-10d %-15s %-15s %-10s", 
