@@ -27,9 +27,7 @@ public class C206_CaseStudy {
 		// Objects for student-
 		studentList.add(new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore"));
 				
-		// Objects for registration
-		
-		// Tuition Timetable List (Dexter)
+		// Objects for tuition registration (DEXTER)
 		regTimetableList.add(new TimetableRegistration(1, 1, "20043405@myrp.edu.sg", "Pending", LocalDateTime.now()));
 				
 		// Objects for tuition information (ANDERS)
@@ -105,9 +103,13 @@ public class C206_CaseStudy {
 					// Delete Tuition Registration
 					C206_CaseStudy.deleteTimetableRegistration(regTimetableList);
 
-				} else {
+				} else if (registerType == 4) {
 					// Invalid Option
-					System.out.println("Invalid Option, Please Enter a Valid Option (1-3)!");
+					C206_CaseStudy.setHeader("LEAVING REGISTRATIONS MENU");
+					System.out.println("Returning to Main Menu.");
+					
+				} else {
+					System.out.println("Invalid Option, Please Enter a Valid Option (1-4)!");
 				}
 
 			} else if (option == OPTION_INFORMATION) {
@@ -286,6 +288,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Register for Tuition Timetable");
 		System.out.println("2. View All Registrations");
 		System.out.println("3. Delete Registration");
+		System.out.println("4. Quit");
 		Helper.line(120, "-");
 	}
 
