@@ -12,41 +12,47 @@ import java.util.ArrayList;
 
 public class TimetableMain {
 	
+	private static final int QUIT = 4;
+	private static final int DELETE_TIMETABLE = 3;
+	private static final int ADD_TIMETABLE = 2;
+	private static final int VIEW_TIMETABLES = 1;
+
 	public static void main(String[] args) {
 		ArrayList<Timetable> ttList = new ArrayList<Timetable>(); 
-		//DEMO
-		LocalDateTime localDateTimeSTA = LocalDateTime.of(2019, 3, 28, 14, 30);
-		LocalDateTime localDateTimeEND = LocalDateTime.of(2019, 4, 28, 17, 30);
-		Timetable tt1 = new Timetable("1",200.0, localDateTimeSTA, localDateTimeEND,"FTF");
 		
-		LocalDateTime localDateTimeSTA2 = LocalDateTime.of(2019, 2, 28, 18, 00);
-		LocalDateTime localDateTimeEND2 = LocalDateTime.of(2019, 3, 28, 21, 00);
-		Timetable tt2 = new Timetable("2",120.0, localDateTimeSTA2, localDateTimeEND2,"HBL");
+		//DEMO
+		LocalDateTime start1 = LocalDateTime.of(2019, 3, 28, 14, 30);
+		LocalDateTime end1 = LocalDateTime.of(2019, 4, 28, 17, 30);
+		Timetable tt1 = new Timetable("1",200.0, start1, end1,"FTF");
+		
+		LocalDateTime start2 = LocalDateTime.of(2019, 2, 28, 18, 00);
+		LocalDateTime end2 = LocalDateTime.of(2019, 3, 28, 21, 00);
+		Timetable tt2 = new Timetable("2",120.0, start2, end2,"HBL");
 		
 		ttList.add(tt1);
 		ttList.add(tt2);
 		//DEMO
 		
 		int option = 0;
-		while(option!= 4)
+		while(option!= QUIT)
 		{
 			TimetableMain.menu();
 			option = Helper.readInt("Enter an option > ");
 			
-			if (option == 1)
+			if (option == VIEW_TIMETABLES)
 			{
 				TimetableMain.viewTimetables(ttList);
 			}
-			else if (option == 2)
+			else if (option == ADD_TIMETABLE)
 			{
 				Timetable tt = TimetableMain.createTimetable();
 				TimetableMain.addTimetable(ttList, tt);
 			}
-			else if (option == 3)
+			else if (option == DELETE_TIMETABLE)
 			{
 				TimetableMain.deleteTimetable(ttList);
 			}
-			else if (option == 4)
+			else if (option == QUIT)
 			{
 				TimetableMain.terminate();
 			}
@@ -82,10 +88,10 @@ public class TimetableMain {
 		double price = Helper.readDouble("Enter price of tuition run > $");
 		
 	
-		System.out.println("<Enter Start Date Details > ");
+		System.out.println("< Enter Start Date Details > ");
 		LocalDateTime startDateTime = inputDateTime();
 
-		System.out.println("<Enter End Date Details > ");
+		System.out.println("< Enter End Date Details > ");
 		LocalDateTime endDateTime = inputDateTime();
 
 		
@@ -100,31 +106,7 @@ public class TimetableMain {
 		ttList.add(tt);
 		System.out.println("Timetable added.");
 	}
-///////////////////////////////////////////////////////////////////////	
-/*	public static void deleteTimetable(ArrayList<Timetable> ttList) {
-		TimetableMain.setHeader("DELETE TIMETABLE");
-		TimetableMain.viewTimetables(ttList);
-		
-		String id = Helper.readString("Enter Timetable ID to be deleted > ");
-		boolean matchID = false;
-		
-		for (int i = 0; i<ttList.size(); i++)
-		{
-			Timetable tt = ttList.get(i);
-			String timetableID = tt.getTimetableID();
-			
-			if (timetableID.equalsIgnoreCase(id))
-			{
-				ttList.remove(tt);
-				matchID = true;
-				System.out.println("Timetable Deleted.");
-			}
-		}
-		if (!matchID) {
-			System.out.println("Invalid ID");
-		}
-	}
-*/	///////////////////////////////////////////////////
+
 	public static void deleteTimetable(ArrayList<Timetable> ttList) {
 		TimetableMain.setHeader("DELETE TIMETABLE");
 		TimetableMain.viewTimetables(ttList);
@@ -158,14 +140,6 @@ public class TimetableMain {
 		}
 		return matchID;
 	}
-	/////////////////////////////////////////////////////////
-	
-	public static void viewTimetables(ArrayList<Timetable> ttList) {
-		TimetableMain.setHeader("SHOWING ALL TIMETABLES");
-		String output = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
-		output += retrieveAllTimetables(ttList);
-		System.out.println(output);
-	}
 	
 	public static String retrieveAllTimetables(ArrayList<Timetable> ttList) {
 		String output = "";
@@ -184,9 +158,16 @@ public class TimetableMain {
 		}
 		return output;
 	}
+	
+	public static void viewTimetables(ArrayList<Timetable> ttList) {
+		TimetableMain.setHeader("SHOWING ALL TIMETABLES");
+		String output = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
+		output += retrieveAllTimetables(ttList);
+		System.out.println(output);
+	}
 				
 	public static String dateFormat(LocalDateTime dateTime) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE dd-MM-yyyy hhmm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE dd-MM-yyyy HHmm");
 		String date = dateTime.format(formatter);
 		return date;
 	}
@@ -200,7 +181,31 @@ public class TimetableMain {
 		LocalDateTime dateTime = LocalDateTime.of(year, mth, day, hr, mins); //year,month,day,hour,minute
 		return dateTime;
 	}
-			
+				
 	
 }	
-		
+///////////////////////////////////////////////////////////////////////	
+/*	public static void deleteTimetable(ArrayList<Timetable> ttList) {
+TimetableMain.setHeader("DELETE TIMETABLE");
+TimetableMain.viewTimetables(ttList);
+
+String id = Helper.readString("Enter Timetable ID to be deleted > ");
+boolean matchID = false;
+
+for (int i = 0; i<ttList.size(); i++)
+{
+Timetable tt = ttList.get(i);
+String timetableID = tt.getTimetableID();
+
+if (timetableID.equalsIgnoreCase(id))
+{
+ttList.remove(tt);
+matchID = true;
+System.out.println("Timetable Deleted.");
+}
+}
+if (!matchID) {
+System.out.println("Invalid ID");
+}
+}
+*/	///////////////////////////////////////////////////	

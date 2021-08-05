@@ -81,7 +81,7 @@ public class TimetableTest {
 		
 		assertEquals("Test output for RetrieveTimetables()", testOutput, timetables);
 	}
-//NullPointer
+
 	@Test
 	public void testDeleteTimetable() {
 				

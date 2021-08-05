@@ -11,28 +11,49 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 	// Arraylist Objects [Dexter]
-	private TimetableRegistration tt1;
-	private TimetableRegistration tt2;
+	private TimetableRegistration ttr1;
+	private TimetableRegistration ttr2;
 	private ArrayList<TimetableRegistration> regTimetableList;
 	
 	//Nicolette
 	private StudentInfo s1;
 	private ArrayList<StudentInfo> studentList;
 	
+	//REVATHI
+	private Timetable tt1;
+	private Timetable tt2;
+	private ArrayList<Timetable> ttList;
+	
 	@Before
 	public void setUp() throws Exception {
 			
 		// TuitionTimetable Test [Dexter]
-		tt1 = new TimetableRegistration(1, 1, "dchua647@gmail.com", "Pending", LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
-		tt2 = new TimetableRegistration(2, 1, "dtan746@gmail.com", "Pending", LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
+		ttr1 = new TimetableRegistration(1, 1, "dchua647@gmail.com", "Pending", LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
+		ttr2 = new TimetableRegistration(2, 1, "dtan746@gmail.com", "Pending", LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
 		
 		regTimetableList = new ArrayList<TimetableRegistration>();	
 		
 		// Nicolette
 		s1 = new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore");
 		studentList = new ArrayList<StudentInfo>();
+		
+		//REVATHI TEST DATA
+		ttList = new ArrayList<Timetable>();
+		
+		LocalDateTime start1 = LocalDateTime.of(2019, 3, 28, 14, 30);
+		LocalDateTime end1 = LocalDateTime.of(2019, 4, 28, 17, 30);
+		tt1 = new Timetable("1",200.0, start1, end1,"FTF");
+		
+		LocalDateTime start2 = LocalDateTime.of(2019, 2, 28, 18, 00);
+		LocalDateTime end2 = LocalDateTime.of(2019, 3, 28, 21, 00);
+		tt2 = new Timetable("2",120.0, start2, end2,"HBL");
+		
+		//ANDERS
+		
+		//JJ
+		
 	}
-
+	
 	// Timetable Test [Dexter]
 	@Test 
 	public void testAddTimetableRegistrations() {
@@ -41,14 +62,14 @@ public class C206_CaseStudyTest {
 
 		// Given no objects in the arraylist, after adding 1 item, the size of the list is 1
 		// The item just added is the same as the first item of the list
-		C206_CaseStudy.addTimetableRegistration(regTimetableList, tt1);
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr1);
 		assertEquals("Test if Timetable Registration arraylist size is 1?", 1, regTimetableList.size());	
-		assertSame("Test that Camcorder is added same as 1st item of the list?", tt1, regTimetableList.get(0));
+		assertSame("Test that Camcorder is added same as 1st item of the list?", ttr1, regTimetableList.get(0));
 
 		// Add another item. test The size of the list is 2?
-		C206_CaseStudy.addTimetableRegistration(regTimetableList, tt2);
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr2);
 		assertEquals("Test that Camcorder arraylist size is 2?", 2, regTimetableList.size());
-		assertSame("Test that Camcorder is added same as 2nd item of the list?", tt2, regTimetableList.get(1));
+		assertSame("Test that Camcorder is added same as 2nd item of the list?", ttr2, regTimetableList.get(1));
 	}
 	
 	// View All Registrations [Dexter]
@@ -63,7 +84,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that ViewAllTimetableRegistrations is Empty", testOutput, allRegistrations);
 
 		// Given an empty list, after adding 1 items, test if the size of the list is 1
-		C206_CaseStudy.addTimetableRegistration(regTimetableList, tt1);
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr1);
 		assertEquals("Test if that Timetable arraylist size is 1?", 1, regTimetableList.size());
 
 		// Test if the expected output string same as the list of Timetable Registrations retrieved
@@ -80,8 +101,8 @@ public class C206_CaseStudyTest {
 		// Boundary Condition
 		assertNotNull("Test if there is valid Timetable arraylist to loan from", regTimetableList);
 		
-		C206_CaseStudy.addTimetableRegistration(regTimetableList, tt1);
-		C206_CaseStudy.addTimetableRegistration(regTimetableList, tt2);
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr1);
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr2);
 		
 		// Normal Condition
 		Boolean ok = C206_CaseStudy.doDeleteTimetableRegistration(regTimetableList, 1);
@@ -150,17 +171,87 @@ public class C206_CaseStudyTest {
 		
 	} // deleteStudentTest
 	
+//--------20006739-Revathi--------------------------------------------------------------------------------------------
+	@Test //REVATHI
+	public void testAddTimetable() {
+		// Timetable list is not null, so that can add a new item
+		assertNotNull("Test if there is valid Timetable ArrayList to add to", ttList);
+
+		// Given an empty list, after adding 1 Timetable, the size of the list is 1
+		TimetableMain.addTimetable(ttList, tt1);
+		assertEquals("Test if that Timetable arraylist size is 1?", 1, ttList.size());
+		
+		// The Timetable just added is as same as the first Timetable of the list
+		assertSame("Test that Timetable added is 1st item of the list?", tt1, ttList.get(0));
+
+		// Add another Timetable. test The size of the list is 2?
+		TimetableMain.addTimetable(ttList, tt2);
+		assertEquals("Test that Timetable arraylist size is 2?", 2, ttList.size());
+		assertSame("Test that Timetable added is 2nd item of the list?", tt2, ttList.get(1));
+	}
+	
+	@Test //REVATHI
+	public void testRetrieveAllTimetables() {
+		
+		// Test if Timetable list is not null but empty - boundary
+		assertNotNull("Test if there is valid Timetable arraylist to retrieve item from", ttList);
+				
+		//test if the list of Timetables retrieved from the TimetableManager is empty - boundary
+		String timetables= TimetableMain.retrieveAllTimetables(ttList);
+		String testOutput = "";
+		assertEquals("Check no timetables inside list", testOutput, timetables);
+
+		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+		TimetableMain.addTimetable(ttList, tt1);
+		assertEquals("Test that timetable arraylist size is 1", 1, ttList.size());
+
+		//test if the expected output string same as the list of timetables retrieved from TimetableManager
+		timetables = TimetableMain.retrieveAllTimetables(ttList);
+		
+		String S1 = TimetableMain.dateFormat(LocalDateTime.of(2019, 3, 28, 14, 30));
+		String E1 = TimetableMain.dateFormat(LocalDateTime.of(2019, 4, 28, 17, 30));
+		testOutput = String.format("%-5s $%-10.2f %-25s %-25s %-5s\n","1",200.0, S1, E1,"FTF");
+		
+		assertEquals("Test output for RetrieveTimetables()", testOutput, timetables);
+	}
+
+	@Test //REVATHI
+	public void testDeleteTimetable() {
+				
+		// Test if Timetable list is not null but empty - boundary
+		assertNotNull("Test if there is valid Timetable arraylist to retrieve item from", ttList);
+		
+		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+		TimetableMain.addTimetable(ttList, tt1);
+		TimetableMain.addTimetable(ttList, tt2);
+		assertEquals("Test that timetable arraylist size is 2", 2, ttList.size());
+
+		// test delete- Size must be 1 after deleting 1 item
+		TimetableMain.doDeleteTimetable(ttList,"1");
+		assertEquals("Test that timetable arraylist size is 1", 1, ttList.size());
+		
+		//test delete- item inside Timetable ArrayList should only be tt2
+		assertNotSame("Test that timetable left in ArrayList is not tt1",tt1,ttList.get(0));
+		
+	}
+//-----------------------------------------------------------------------------------------------------------------	
 	
 	@After
 	public void tearDown() throws Exception {
-		// Timetable Test [Dexter]
-		tt1 = null;
-		tt2 = null;
+		// Timetable Registration Test [Dexter]
+		ttr1 = null;
+		ttr2 = null;
 		regTimetableList = null;
 		
 		//Student Test [Nicolette]
 		s1 = null;
 		studentList = null;
+		
+		//Timetable Test [Revathi]
+		tt1 = null;
+		tt2 = null;
+		ttList = null;
+		
 	}
 
 }
