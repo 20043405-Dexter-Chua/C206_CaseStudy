@@ -18,6 +18,9 @@ public class C206_CaseStudyTest {
 	private StudentInfo s1;
 	private ArrayList<StudentInfo> studentList;
 	
+	// ANDERS
+	private static final ArrayList<Tuition> tuitionList =  new ArrayList<Tuition>();
+	
 	@Before
 	public void setUp() throws Exception {
 			
@@ -30,6 +33,13 @@ public class C206_CaseStudyTest {
 		// Nicolette
 		s1 = new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore");
 		studentList = new ArrayList<StudentInfo>();
+		
+		// ANDERS --- Tuition Information Test Objects
+		Tuition test1 = new Tuition("ABC001", "Tuition_Test1", "TestSubject1", "This is for testing", 789, "Pre Requisite Test");
+		Tuition test2 = new Tuition("XYZ002", "Tuition_Test2", "TestSubject2", "This is for testing", 456, "Pre Requisite Test");
+		tuitionList.add(test1);
+		tuitionList.add(test2);
+		
 	}
 
 	// Timetable Test [Dexter]
@@ -47,7 +57,7 @@ public class C206_CaseStudyTest {
 		// Add another item. test The size of the list is 2?
 		C206_CaseStudy.addTimetableRegistration(regTimetableList, tt2);
 		assertEquals("Test that Camcorder arraylist size is 2?", 2, regTimetableList.size());
-		assertSame("Test that Camcorder is added same as 2nd item of the list?", tt2, regTimetableList.get(1));
+		assertSame("Test that Camcorder is added same as 2nd item of the list?", tt2, regTimetableList.get(1)); 
 	}
 	
 	// View All Registrations
@@ -149,6 +159,59 @@ public class C206_CaseStudyTest {
 	} // deleteStudentTest
 	
 	
+	// --------------- ANDERS --------------
+	
+	/**
+	 * Only 2 main test objects are used test-wide, test1 and test2 with index 0 and 1, respectively. (Thus the static final declaration for arrayList)
+	 * All other test objects will be removed after test completes.
+	 * ~ Anders
+	 */
+	
+	// Test for Add method
+	public void addTuitionInformationTest() {	
+		// #1 - Test after adding tuitionList's size increases by 1	--- Normal
+		// before adding
+		int beforeAdd = tuitionList.size();
+		// after adding
+		tuitionList.add(new Tuition("T3STS1Z3", "SizeTest", "SizeAddSubject", "This is for Size_Test", 159, "Pre Requisite Size_Add"));
+		int afterAdd = tuitionList.size();
+		assertEquals(beforeAdd + 1, afterAdd);
+		tuitionList.remove(2); // is removed to not affect other test cases
+		
+		
+		// #2 - Test that after adding tuitionList is not Null		--- Normal
+		tuitionList.add(new Tuition("ADDT3ST", "AddTest", "AddTestSubject2", "This is for test_Adding", 246, "Pre Requisite Add_Test"));
+		// after adding
+		assertNotNull(tuitionList);
+		tuitionList.remove(2); // is removed to not affect other test cases
+		
+		
+		// #3 - Test that after adding, tuitionList is added to the next available index (last index)	--- Normal
+		// assuming index of 2 is the most recently added tuition object (tuition3)
+		Tuition tuition3 = new Tuition("Tuition3", "tuit3", "TSubject3", "This is for test_Adding", 135, "Pre Requisite Add_Test");
+		tuitionList.add(tuition3);
+		assertSame(tuitionList.get(2), tuition3);
+		tuitionList.remove(2); // is removed to not affect other test cases
+	}
+	
+	public void viewAllTuitionInformationTest() {
+		// #1 - Test that tuitionList is not Null for information to be displayed
+		assertNotNull(tuitionList);
+		assertEquals(tuitionList.size(), 0);
+		
+		// #2 - Test that there are no duplicate tuition objects before displaying. (Normal)
+		// ***Checks are done based on tuition code, as it is unique for each object.***
+		for (int i = 0; i < tuitionList.size(); i++) {
+			if (i != tuitionList.size() - 1) {
+				
+			}
+		}
+
+	}
+	
+	
+	
+	
 	@After
 	public void tearDown() throws Exception {
 		// Timetable Test [Dexter]
@@ -159,6 +222,13 @@ public class C206_CaseStudyTest {
 		//Student Test [Nicolette]
 		s1 = null;
 		studentList = null;
+		
+		// Tuition Information Test --- Anders
+		/**
+		test1 = null;
+		test2 = null;
+		tuitionList = null;
+		**/
 	}
 
 }

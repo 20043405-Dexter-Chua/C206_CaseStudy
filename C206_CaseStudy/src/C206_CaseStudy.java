@@ -31,8 +31,8 @@ public class C206_CaseStudy {
 		regTimetableList.add(new TimetableRegistration(1, 1, "20043405@myrp.edu.sg", "Pending", LocalDateTime.now()));
 				
 		// Objects for tuition information (ANDERS)
-		Tuition t1 = new Tuition("ABC001", "Tuition_Test1", "Subject1", "This is for testing", 123, "Pre Requisite");
-		Tuition t2 = new Tuition("XYZ002", "Tuition_Test2", "Subject2", "This is for testing", 456, "Pre Requisite");
+		Tuition t1 = new Tuition("ABC001", "Tuition_Test1", "SubjectGroup1", "This is for testing", 123, "Pre Requisite");
+		Tuition t2 = new Tuition("XYZ002", "Tuition_Test2", "SubjectGroup2", "This is for testing", 456, "Pre Requisite");
 		tuitionList.add(t1);
 		tuitionList.add(t2);
 		
@@ -376,7 +376,7 @@ public class C206_CaseStudy {
 
 	// --------------- ANDERS --------------
 	// Manage Tuition Information Menu (Option 3)
-	// Display Menu Options
+	// Display Menu Options 
 	public static void tuitionMenu() {
 		C206_CaseStudy.setHeader("TUITION INFORMATION MANAGEMENT");
 		System.out.println("1. Add Tuition Information");
@@ -386,7 +386,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 	
-	// Add Tuition Information
+	// Add Tuition Information --- Option 1 
 	public static void addTutionInformation() {
 		String TuitionCode = Helper.readString("Enter new tuition code > ");
 		String TuitionTitle = Helper.readString("Enter new tuition title > ");
@@ -398,18 +398,18 @@ public class C206_CaseStudy {
 		tuitionList.add(nTuition);
 	}
 	
-	// View All Tuition Information
+	// View All Tuition Information --- Option 2
 	public static void viewAllTuitionInformation() {
-		String tInfo = String.format("%-15s %-20s %-15s %-23s %-10s %-10s\n","TUITION CODE", "TUITION TITLE", "SUBJECT NAME", "DESCRIPTION","DURATION","PRE-REQUISITE");
+		String tInfo = String.format("%-15s %-20s %-20s %-23s %-10s %-10s\n","TUITION CODE", "TUITION TITLE", "SUBJECT GROUP NAME", "DESCRIPTION","DURATION","PRE-REQUISITE");
 		for (int i = 0; i < tuitionList.size(); i ++) {
 			Tuition t = tuitionList.get(i);
-			tInfo += String.format("%-15s %-20s %-15s %-23s %-10.2f %-10s\n",t.getTuitionCode(),t.getTuitionTitle(),t.getSubjectName(), 
+			tInfo += String.format("%-15s %-20s %-20s %-23s %-10.2f %-10s\n",t.getTuitionCode(),t.getTuitionTitle(),t.getSubjectName(), 
 					t.getTuitionDescription(),t.getDuration(),t.getPreRequisite());
 		}
 		System.out.println(tInfo);
 	}
 
-	// Delete Tuition Information
+	// Delete Tuition Information --- Option 3
 	public static void deleteTuitionInformation() {
 		boolean found = false;
 		String tuitionD = "";

@@ -8,17 +8,17 @@
 
 public class Tuition {
 	
-	private String tuitionCode;
+	private String tuitionCode;	// Unique for each Tuition object
 	private String tuitionTitle;
-	private String subjectName;
+	private String subjectGroupName;
 	private String tDescription;
 	private double duration;
 	private String preRequisite;
 	
-	public Tuition(String tC, String tT, String sN, String tD, double duration, String pR) {
+	public Tuition(String tC, String tT, String sGN, String tD, double duration, String pR) {
 		this.tuitionCode = tC;
 		this.tuitionTitle = tT;
-		this.subjectName = sN;
+		this.subjectGroupName = sGN;
 		this.tDescription = tD;
 		this.duration = duration;
 		this.preRequisite = pR;
@@ -41,11 +41,11 @@ public class Tuition {
 	}
 	
 	public String getSubjectName() {
-		return this.subjectName;
+		return this.subjectGroupName;
 	}
 	
 	public void setSubjectName(String sName) {
-		this.subjectName = sName;
+		this.subjectGroupName = sName;
 	}
 	
 	public String getTuitionDescription() {
