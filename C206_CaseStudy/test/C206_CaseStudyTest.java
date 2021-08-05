@@ -21,7 +21,7 @@ public class C206_CaseStudyTest {
 
 
 	// ANDERS
-	private static final ArrayList<Tuition> tuitionList =  new ArrayList<Tuition>();
+	private ArrayList<Tuition> tuitionList =  new ArrayList<Tuition>();
 
 	//REVATHI
 	private Timetable tt1;
@@ -290,6 +290,19 @@ public class C206_CaseStudyTest {
 				
 			}
 		}
+		
+		// #3 - Test that after an object is removed, it does is not displayed.
+		// assuming tuition object of index 2 is being removed
+		Tuition removed = tuitionList.get(2);
+		tuitionList.remove(tuitionList.get(2));
+
+		boolean isRemoved = true;
+		for(Tuition t : tuitionList){
+		     if(t == removed){
+		          isRemoved = false;
+		     }
+		}
+		assertTrue(isRemoved);
 
 	}
 	
