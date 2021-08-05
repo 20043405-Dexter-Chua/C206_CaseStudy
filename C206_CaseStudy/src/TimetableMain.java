@@ -36,25 +36,25 @@ public class TimetableMain {
 		int option = 0;
 		while(option!= QUIT)
 		{
-			TimetableMain.menu();
+			menu();
 			option = Helper.readInt("Enter an option > ");
 			
 			if (option == VIEW_TIMETABLES)
 			{
-				TimetableMain.viewTimetables(ttList);
+				viewTimetables(ttList);
 			}
 			else if (option == ADD_TIMETABLE)
 			{
-				Timetable tt = TimetableMain.createTimetable();
-				TimetableMain.addTimetable(ttList, tt);
+				Timetable tt = createTimetable();
+				addTimetable(ttList, tt);
 			}
 			else if (option == DELETE_TIMETABLE)
 			{
-				TimetableMain.deleteTimetable(ttList);
+				deleteTimetable(ttList);
 			}
 			else if (option == QUIT)
 			{
-				TimetableMain.terminate();
+				terminate();
 			}
 			else
 			{
@@ -67,7 +67,7 @@ public class TimetableMain {
 	}
 
 	public static void menu() {
-		TimetableMain.setHeader("TIMETABLE MANAGER");
+		setHeader("TIMETABLE MANAGER");
 		System.out.println("1. Display Timetables");
 		System.out.println("2. Add Timetable");
 		System.out.println("3. Delete Timetable");
@@ -102,14 +102,14 @@ public class TimetableMain {
 	
 	public static void addTimetable(ArrayList<Timetable> ttList, Timetable tt) {
 		
-		TimetableMain.setHeader("ADD TIMETABLE");
+		setHeader("ADD TIMETABLE");
 		ttList.add(tt);
 		System.out.println("Timetable added.");
 	}
 
 	public static void deleteTimetable(ArrayList<Timetable> ttList) {
-		TimetableMain.setHeader("DELETE TIMETABLE");
-		TimetableMain.viewTimetables(ttList);
+		setHeader("DELETE TIMETABLE");
+		viewTimetables(ttList);
 		
 		String id = Helper.readString("Enter Timetable ID to be deleted > ");
 		boolean matchID = doDeleteTimetable(ttList, id);
@@ -160,7 +160,7 @@ public class TimetableMain {
 	}
 	
 	public static void viewTimetables(ArrayList<Timetable> ttList) {
-		TimetableMain.setHeader("SHOWING ALL TIMETABLES");
+		setHeader("SHOWING ALL TIMETABLES");
 		String output = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
 		output += retrieveAllTimetables(ttList);
 		System.out.println(output);
@@ -186,8 +186,8 @@ public class TimetableMain {
 }	
 ///////////////////////////////////////////////////////////////////////	
 /*	public static void deleteTimetable(ArrayList<Timetable> ttList) {
-TimetableMain.setHeader("DELETE TIMETABLE");
-TimetableMain.viewTimetables(ttList);
+setHeader("DELETE TIMETABLE");
+viewTimetables(ttList);
 
 String id = Helper.readString("Enter Timetable ID to be deleted > ");
 boolean matchID = false;
