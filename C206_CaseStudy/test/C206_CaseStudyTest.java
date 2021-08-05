@@ -270,7 +270,7 @@ public class C206_CaseStudyTest {
 
 	// Test for Add method
 	@Test
-	public void addTuitionInformationTest() {
+	public void addTuitionInformationTest() { //[ANDERS]
 
 		// #1 - Test that after adding tuitionList is not Null --- Normal
 		C206_CaseStudy.doAddArrayList(tuitionList, test1);
@@ -293,7 +293,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void viewAllTuitionInformationTest() {
+	public void viewAllTuitionInformationTest() { //[ANDERS]
 		C206_CaseStudy.doAddArrayList(tuitionList, test1);
 		C206_CaseStudy.doAddArrayList(tuitionList, test2);
 		// #1 - Test that tuitionList is not Null for information to be displayed
@@ -319,7 +319,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void deleteTuitionInformationTest() {
+	public void deleteTuitionInformationTest() { //[ANDERS]
 		C206_CaseStudy.doAddArrayList(tuitionList, test1);
 		C206_CaseStudy.doAddArrayList(tuitionList, test2);
 		// #1 - Test that tuitionList is not null before any objects can be removed.

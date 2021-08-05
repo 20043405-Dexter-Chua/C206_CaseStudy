@@ -429,7 +429,7 @@ public class C206_CaseStudy {
 	// --------------- ANDERS --------------
 	// Manage Tuition Information Menu (Option 3)
 	// Display Menu Options 
-	public static void tuitionMenu() {
+	public static void tuitionMenu() { //[ANDERS]
 		C206_CaseStudy.setHeader("TUITION INFORMATION MANAGEMENT");
 		System.out.println("1. Add Tuition Information");
 		System.out.println("2. View All Tuition Information");
@@ -439,7 +439,7 @@ public class C206_CaseStudy {
 	}
 	
 	// Add Tuition Information --- Option 1 
-	public static Tuition addTutionInformation() {
+	public static Tuition addTutionInformation() { //[ANDERS]
 		String TuitionCode = Helper.readString("Enter new tuition code > ");
 		String TuitionTitle = Helper.readString("Enter new tuition title > ");
 		String SubjectName = Helper.readString("Enter subject name > ");
@@ -455,8 +455,9 @@ public class C206_CaseStudy {
 	}
 	
 	// View All Tuition Information --- Option 2
-	public static String viewAllTuitionInformation(ArrayList<Tuition> tuitionList) {
-		String tInfo = String.format("%-15s %-20s %-20s %-23s %-10s %-10s\n","TUITION CODE", "TUITION TITLE", "SUBJECT GROUP NAME", "DESCRIPTION","DURATION","PRE-REQUISITE");
+	public static String viewAllTuitionInformation(ArrayList<Tuition> tuitionList) { //[ANDERS]
+		String tInfo = String.format("%-15s %-20s %-20s %-23s %-10s %-10s\n","TUITION CODE", "TUITION TITLE", "SUBJECT GROUP NAME", 
+				"DESCRIPTION","DURATION","PRE-REQUISITE");
 		for (int i = 0; i < tuitionList.size(); i ++) {
 			Tuition t = tuitionList.get(i);
 			tInfo += String.format("%-15s %-20s %-20s %-23s %-10.2f %-10s\n",t.getTuitionCode(),t.getTuitionTitle(),t.getSubjectName(), 
@@ -464,12 +465,12 @@ public class C206_CaseStudy {
 		}
 		return tInfo;
 	}
-	public static void doShowViewAllTuitionInformation(String output) {
+	public static void doShowViewAllTuitionInformation(String output) { //[ANDERS]
 		System.out.println(output);
 	}
 
 	// Delete Tuition Information --- Option 3
-	public static Tuition deleteTuitionInformation(ArrayList<Tuition> tuitionList) {
+	public static Tuition deleteTuitionInformation(ArrayList<Tuition> tuitionList) { //[ANDERS]
 		boolean found = false;
 		Tuition doDelete = null;
 		String tuitionD = "";
@@ -500,7 +501,7 @@ public class C206_CaseStudy {
 		return doDelete;
 	}
 	
-	public static boolean doDelete(Tuition dTuition) {
+	public static boolean doDelete(Tuition dTuition) { //[ANDERS]
 		boolean deleted = false;
 		if(dTuition != null) {
 			tuitionList.remove(dTuition);
