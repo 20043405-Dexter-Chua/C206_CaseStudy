@@ -37,6 +37,7 @@ public class C206_CaseStudy {
 		tuitionList.add(t2);
 		
 		// Objects for tuition timetable
+		
 				
 		// Objects for teacher
 	
@@ -82,29 +83,29 @@ public class C206_CaseStudy {
 					} // while
 					
 			} else if (option == OPTION_REGISTRATION) {
-				// Manage Tuition Registration
+				// Manage Tuition Registration [Dexter]
 				C206_CaseStudy.registerTypeMenu();
 
 				int registerType = Helper.readInt("Enter an Option: ");
 
 				if (registerType == 1) {
-					// Register for Tuition Timetable
+					// Register for Tuition Timetable [Dexter]
 					C206_CaseStudy.setHeader("REGISTER TUITION TIMETABLE");
 					TimetableRegistration newReg = inputTimetable();
 					C206_CaseStudy.addTimetableRegistration(regTimetableList, newReg);
 
 				} else if (registerType == 2) {
-					// View All Tuition Registrations
+					// View All Tuition Registrations [Dexter]
 					C206_CaseStudy.setHeader("VIEW ALL REGISTRATIONS");
 					C206_CaseStudy.retrieveAllTimetableRegistrations(regTimetableList);
 					C206_CaseStudy.viewAllTimetableRegistrations(regTimetableList);
 
 				} else if (registerType == 3) {
-					// Delete Tuition Registration
+					// Delete Tuition Registration [Dexter]
 					C206_CaseStudy.deleteTimetableRegistration(regTimetableList);
 
 				} else if (registerType == 4) {
-					// Invalid Option
+					// Invalid Option [Dexter]
 					C206_CaseStudy.setHeader("LEAVING REGISTRATIONS MENU");
 					System.out.println("Returning to Main Menu.");
 					
@@ -113,7 +114,7 @@ public class C206_CaseStudy {
 				}
 
 			} else if (option == OPTION_INFORMATION) {
-				// Manage Tuition Information
+				// Manage Tuition Information 
 				tuitionMenu();
 				int infoOption = Helper.readInt("Enter option to choose > ");
 					switch(infoOption) {
@@ -141,6 +142,7 @@ public class C206_CaseStudy {
 
 			} else if (option == OPTION_TIMETABLE) {
 				// Manage Tuition Timetable Information
+				
 
 			} else if (option == OPTION_TEACHERS) {
 				// Manage Tuition Teachers
@@ -358,6 +360,7 @@ public class C206_CaseStudy {
 		}
 	}
 
+	// Delete Registration Method [Dexter]
 	public static boolean doDeleteTimetableRegistration(ArrayList<TimetableRegistration> timetableList, int delReg) {
 		boolean isFound = false;
 
