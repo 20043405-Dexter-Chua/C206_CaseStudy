@@ -24,10 +24,10 @@ public class Timetable {
 	private LocalDateTime endTime;
 	private String mode;
 	
-	public Timetable(String timetableID, double price, LocalDateTime startTime, LocalDateTime endTime, String mode) {
+	public Timetable(String timetableID, double price, LocalDateTime start, LocalDateTime endTime, String mode) {
 		this.timetableID = timetableID;
 		this.price = price;
-		this.startTime = startTime;
+		this.startTime = start;
 		this.endTime = endTime;
 		this.mode = mode;
 	}

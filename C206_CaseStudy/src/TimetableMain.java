@@ -124,7 +124,7 @@ public class TimetableMain {
 			System.out.println("Invalid ID");
 		}
 	}
-*/	//////////////////////////////////////////////////
+*/	///////////////////////////////////////////////////
 	public static void deleteTimetable(ArrayList<Timetable> ttList) {
 		TimetableMain.setHeader("DELETE TIMETABLE");
 		TimetableMain.viewTimetables(ttList);
@@ -159,12 +159,14 @@ public class TimetableMain {
 		return matchID;
 	}
 	/////////////////////////////////////////////////////////
+	
 	public static void viewTimetables(ArrayList<Timetable> ttList) {
 		TimetableMain.setHeader("SHOWING ALL TIMETABLES");
 		String output = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
 		output += retrieveAllTimetables(ttList);
 		System.out.println(output);
 	}
+	
 	public static String retrieveAllTimetables(ArrayList<Timetable> ttList) {
 		String output = "";
 		

@@ -57,7 +57,7 @@ public class TimetableTest {
 	}
 	
 	@Test
-	public void testRetrieveTimetables() {
+	public void testRetrieveAllTimetables() {
 		
 		// Test if Timetable list is not null but empty - boundary
 		assertNotNull("Test if there is valid Timetable arraylist to retrieve item from", ttList);
@@ -85,6 +85,9 @@ public class TimetableTest {
 	@Test
 	public void testDeleteTimetable() {
 				
+		// Test if Timetable list is not null but empty - boundary
+		assertNotNull("Test if there is valid Timetable arraylist to retrieve item from", ttList);
+		
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 		TimetableMain.addTimetable(ttList, tt1);
 		TimetableMain.addTimetable(ttList, tt2);
@@ -95,7 +98,7 @@ public class TimetableTest {
 		assertEquals("Test that timetable arraylist size is 1", 1, ttList.size());
 		
 		//test delete- item inside Timetable ArrayList should only be tt2
-		assertEquals("Test that timetable left in ArrayList is not tt1",tt2,ttList.get(0));
+		assertNotSame("Test that timetable left in ArrayList is not tt1",tt1,ttList.get(0));
 		
 	}
 	
