@@ -18,16 +18,15 @@ public class C206_CaseStudyTest {
 	//Nicolette
 	private StudentInfo s1;
 	private ArrayList<StudentInfo> studentList;
-	
-<<<<<<< HEAD
+
+
 	// ANDERS
 	private static final ArrayList<Tuition> tuitionList =  new ArrayList<Tuition>();
-=======
+
 	//REVATHI
 	private Timetable tt1;
 	private Timetable tt2;
 	private ArrayList<Timetable> ttList;
->>>>>>> branch 'master' of https://github.com/20043405-Dexter-Chua/C206_CaseStudy.git
 	
 	@Before
 	public void setUp() throws Exception {
@@ -42,13 +41,12 @@ public class C206_CaseStudyTest {
 		s1 = new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore");
 		studentList = new ArrayList<StudentInfo>();
 		
-<<<<<<< HEAD
 		// ANDERS --- Tuition Information Test Objects
 		Tuition test1 = new Tuition("ABC001", "Tuition_Test1", "TestSubject1", "This is for testing", 789, "Pre Requisite Test");
 		Tuition test2 = new Tuition("XYZ002", "Tuition_Test2", "TestSubject2", "This is for testing", 456, "Pre Requisite Test");
 		tuitionList.add(test1);
 		tuitionList.add(test2);
-=======
+		
 		//REVATHI TEST DATA
 		ttList = new ArrayList<Timetable>();
 		
@@ -60,10 +58,7 @@ public class C206_CaseStudyTest {
 		LocalDateTime end2 = LocalDateTime.of(2019, 3, 28, 21, 00);
 		tt2 = new Timetable("2",120.0, start2, end2,"HBL");
 		
-		//ANDERS
 		
-		//JJ
->>>>>>> branch 'master' of https://github.com/20043405-Dexter-Chua/C206_CaseStudy.git
 		
 	}
 	
@@ -82,11 +77,10 @@ public class C206_CaseStudyTest {
 		// Add another item. test The size of the list is 2?
 		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr2);
 		assertEquals("Test that Camcorder arraylist size is 2?", 2, regTimetableList.size());
-<<<<<<< HEAD
+
 		assertSame("Test that Camcorder is added same as 2nd item of the list?", tt2, regTimetableList.get(1)); 
-=======
+
 		assertSame("Test that Camcorder is added same as 2nd item of the list?", ttr2, regTimetableList.get(1));
->>>>>>> branch 'master' of https://github.com/20043405-Dexter-Chua/C206_CaseStudy.git
 	}
 	
 	// View All Registrations [Dexter]
@@ -317,20 +311,18 @@ public class C206_CaseStudyTest {
 		s1 = null;
 		studentList = null;
 		
-<<<<<<< HEAD
 		// Tuition Information Test --- Anders
 		/**
 		test1 = null;
 		test2 = null;
 		tuitionList = null;
 		**/
-=======
+
 		//Timetable Test [Revathi]
 		tt1 = null;
 		tt2 = null;
 		ttList = null;
 		
->>>>>>> branch 'master' of https://github.com/20043405-Dexter-Chua/C206_CaseStudy.git
 	}
 
 }
