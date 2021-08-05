@@ -10,9 +10,13 @@ public class C206_CaseStudy {
 	private static final int OPTION_TIMETABLE = 4;
 	private static final int OPTION_TEACHERS = 5;
 	private static final int OPTION_QUIT = 6;
-	
+	// Dexter
 	private static final ArrayList<TimetableRegistration> regTimetableList = new ArrayList<TimetableRegistration>();
+	
+	// Anders
 	private static final ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
+	private static Tuition t1;
+	private static Tuition t2;	
 	
 	// Nicolette
 	private static final int STUDENT_ADD = 1;
@@ -40,8 +44,8 @@ public class C206_CaseStudy {
 		regTimetableList.add(new TimetableRegistration(1, 1, "20043405@myrp.edu.sg", "Pending", LocalDateTime.now()));
 				
 		// Objects for tuition information (ANDERS)
-		Tuition t1 = new Tuition("ABC001", "Tuition_Test1", "SubjectGroup1", "This is for testing", 123, "Pre Requisite");
-		Tuition t2 = new Tuition("XYZ002", "Tuition_Test2", "SubjectGroup2", "This is for testing", 456, "Pre Requisite");
+		t1 = new Tuition("ABC001", "Tuition_Test1", "SubjectGroup1", "This is for testing", 123, "Pre Requisite");
+		t2 = new Tuition("XYZ002", "Tuition_Test2", "SubjectGroup2", "This is for testing", 456, "Pre Requisite");
 		tuitionList.add(t1);
 		tuitionList.add(t2);
 		
@@ -485,6 +489,16 @@ public class C206_CaseStudy {
 			System.out.println("The tuition code you entered cannot be found. Please try again.");
 		}
 	}
+	
+	// Load Tuition objects to arrayList
+	public static void load() {
+		String dataInList = "";
+		for (int i = 0; i < tuitionList.size(); i ++) {
+			Tuition t = tuitionList.get(i);
+			dataInList += String.format("%-15s\n",t.getTuitionCode());
+		}
+	}
+	
 	// ------------------------------------
 
 /**
