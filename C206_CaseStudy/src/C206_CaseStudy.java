@@ -142,15 +142,15 @@ public class C206_CaseStudy {
 					switch(infoOption) {
 					case 1:
 						// Add Tuition Information
-						addTutionInformation();						
+						doAddArrayList(tuitionList, addTutionInformation());						
 						break;
 					case 2:
 						// View All Tuition Information
-						viewAllTuitionInformation();
+						doShowViewAllTuitionInformation(viewAllTuitionInformation(tuitionList));
 						break;
 					case 3:
 						// Delete Tuition Information
-						deleteTuitionInformation();
+						doDelete(deleteTuitionInformation(tuitionList));
 						break;
 					case 4:
 						// Quit
@@ -439,7 +439,7 @@ public class C206_CaseStudy {
 	}
 	
 	// Add Tuition Information --- Option 1 
-	public static void addTutionInformation() {
+	public static Tuition addTutionInformation() {
 		String TuitionCode = Helper.readString("Enter new tuition code > ");
 		String TuitionTitle = Helper.readString("Enter new tuition title > ");
 		String SubjectName = Helper.readString("Enter subject name > ");
@@ -447,23 +447,31 @@ public class C206_CaseStudy {
 		double Duration = Helper.readDouble("Enter tuition duration > ");
 		String preRequisite = Helper.readString("Enter preRequisite > ");
 		Tuition nTuition = new Tuition(TuitionCode, TuitionTitle, SubjectName, Description, Duration, preRequisite);
+		return nTuition;
+	}
+
+	public static void doAddArrayList(ArrayList<Tuition> tuitionList, Tuition nTuition) {
 		tuitionList.add(nTuition);
 	}
 	
 	// View All Tuition Information --- Option 2
-	public static void viewAllTuitionInformation() {
+	public static String viewAllTuitionInformation(ArrayList<Tuition> tuitionList) {
 		String tInfo = String.format("%-15s %-20s %-20s %-23s %-10s %-10s\n","TUITION CODE", "TUITION TITLE", "SUBJECT GROUP NAME", "DESCRIPTION","DURATION","PRE-REQUISITE");
 		for (int i = 0; i < tuitionList.size(); i ++) {
 			Tuition t = tuitionList.get(i);
 			tInfo += String.format("%-15s %-20s %-20s %-23s %-10.2f %-10s\n",t.getTuitionCode(),t.getTuitionTitle(),t.getSubjectName(), 
 					t.getTuitionDescription(),t.getDuration(),t.getPreRequisite());
 		}
-		System.out.println(tInfo);
+		return tInfo;
+	}
+	public static void doShowViewAllTuitionInformation(String output) {
+		System.out.println(output);
 	}
 
 	// Delete Tuition Information --- Option 3
-	public static void deleteTuitionInformation() {
+	public static Tuition deleteTuitionInformation(ArrayList<Tuition> tuitionList) {
 		boolean found = false;
+		Tuition doDelete = null;
 		String tuitionD = "";
 		String delete = Helper.readString("Enter Tuition Code to delete > ");
 		for (int i = 0; i < tuitionList.size(); i++) {
@@ -473,11 +481,12 @@ public class C206_CaseStudy {
 				char confirm = Helper.readChar("Are you sure you want to delete " + tuitionD + " (Y/N) ? > ");
 				
 				if((confirm == 'y') || (confirm == 'Y')) {
-					tuitionList.remove(tuitionList.get(i));
+					doDelete = tuitionList.get(i);
+					//tuitionList.remove(tuitionList.get(i));
 					System.out.println(tuitionD + "has successfully been deleted!");
 					
 				}else if ((confirm == 'n') || (confirm == 'N')) {
-					System.out.println(tuitionD + " will not be deleted.");
+					System.out.println("Tuition code: " + tuitionD + " will not be deleted.");
 					
 				}else {
 					System.out.println("Please enter a valid option");
@@ -488,6 +497,16 @@ public class C206_CaseStudy {
 		if(!found) {
 			System.out.println("The tuition code you entered cannot be found. Please try again.");
 		}
+		return doDelete;
+	}
+	
+	public static boolean doDelete(Tuition dTuition) {
+		boolean deleted = false;
+		if(dTuition != null) {
+			tuitionList.remove(dTuition);
+			deleted = true;
+		}
+		return deleted;
 	}
 	
 	// Load Tuition objects to arrayList
