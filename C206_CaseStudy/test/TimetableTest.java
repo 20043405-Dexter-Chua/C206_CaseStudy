@@ -28,13 +28,14 @@ public class TimetableTest {
 	public void setUp() throws Exception {
 		// prepare test data
 		ttList = new ArrayList<Timetable>();
+		
 		LocalDateTime localDateTimeSTA = LocalDateTime.of(2019, 3, 28, 14, 30);
 		LocalDateTime localDateTimeEND = LocalDateTime.of(2019, 4, 28, 17, 30);
-		Timetable tt1 = new Timetable("1",200.0, localDateTimeSTA, localDateTimeEND,"FTF");
+		tt1 = new Timetable("1",200.0, localDateTimeSTA, localDateTimeEND,"FTF");
 		
 		LocalDateTime localDateTimeSTA2 = LocalDateTime.of(2019, 2, 28, 18, 00);
 		LocalDateTime localDateTimeEND2 = LocalDateTime.of(2019, 3, 28, 21, 00);
-		Timetable tt2 = new Timetable("2",120.0, localDateTimeSTA2, localDateTimeEND2,"HBL");
+		tt2 = new Timetable("2",120.0, localDateTimeSTA2, localDateTimeEND2,"HBL");
 		
 	}
 
@@ -69,15 +70,14 @@ public class TimetableTest {
 
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 		TimetableMain.addTimetable(ttList, tt1);
-		TimetableMain.addTimetable(ttList, tt2);
-		assertEquals("Test that timetable arraylist size is 2", 2, ttList.size());
+		assertEquals("Test that timetable arraylist size is 1", 1, ttList.size());
 
 		//test if the expected output string same as the list of timetables retrieved from TimetableManager
 		timetables = TimetableMain.retrieveAllTimetables(ttList);
 		
 		String S1 = TimetableMain.dateFormat(LocalDateTime.of(2019, 3, 28, 14, 30));
 		String E1 = TimetableMain.dateFormat(LocalDateTime.of(2019, 4, 28, 17, 30));
-		testOutput = String.format("%-5s %-10.2f %-25s %-25s %-5s\n","1",200.0, S1, E1,"FTF");
+		testOutput = String.format("%-5s $%-10.2f %-25s %-25s %-5s\n","1",200.0, S1, E1,"FTF");
 		
 		assertEquals("Test output for RetrieveTimetables()", testOutput, timetables);
 	}
@@ -94,7 +94,7 @@ public class TimetableTest {
 		assertEquals("Test that timetable arraylist size is 2", 2, ttList.size());
 
 		// test delete- Size must be 1 after deleting 1 item
-		TimetableMain.deleteTimetable(ttList);
+		TimetableMain.doDeleteTimetable(ttList,"1");
 		assertEquals("Test that timetable arraylist size is 1", 1, ttList.size());
 		
 		//test delete- item inside Timetable ArrayList should only be tt2
