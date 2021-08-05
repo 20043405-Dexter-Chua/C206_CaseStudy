@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
+	// Arraylist Objects [Dexter]
 	private TimetableRegistration tt1;
 	private TimetableRegistration tt2;
 	private ArrayList<TimetableRegistration> regTimetableList;
@@ -50,7 +51,7 @@ public class C206_CaseStudyTest {
 		assertSame("Test that Camcorder is added same as 2nd item of the list?", tt2, regTimetableList.get(1));
 	}
 	
-	// View All Registrations
+	// View All Registrations [Dexter]
 	@Test
 	public void testRetrieveAllTimetableRegistrations() {
 		// Test if Item list is not null but empty, so that can add a new item
@@ -73,6 +74,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that ViewAllTimetableRegistration list", testOutput, allRegistrations);
 	}
 
+	// Cancel Registration [Dexter]
 	@Test
 	public void doDeleteTimetableRegistrationTest() {
 		// Boundary Condition
