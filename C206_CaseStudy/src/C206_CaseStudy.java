@@ -506,7 +506,7 @@ public class C206_CaseStudy {
  */
 // Manage Tuition Timetable Menu (Option 4) (REVATHI)
 	public static void timetableMenu() {
-		TimetableMain.setHeader("TIMETABLE MANAGER");
+		setHeader("TIMETABLE MANAGER");
 		System.out.println("1. Display Timetables");
 		System.out.println("2. Add Timetable");
 		System.out.println("3. Delete Timetable");
@@ -546,7 +546,7 @@ public class C206_CaseStudy {
 	}
 	// Print Timetables Retrieved in UI designed (Option 1-VIEW) (REVATHI)
 	public static void viewTimetables(ArrayList<Timetable> ttList) {
-		TimetableMain.setHeader("SHOWING ALL TIMETABLES");
+		setHeader("SHOWING ALL TIMETABLES");
 		String output = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
 		output += retrieveAllTimetables(ttList);
 		System.out.println(output);
@@ -583,15 +583,15 @@ public class C206_CaseStudy {
 	//Adding Timetable instance to ArrayList of Timetables (Option 2-ADD) (REVATHI)
 	public static void addTimetable(ArrayList<Timetable> ttList, Timetable tt) {
 		
-		TimetableMain.setHeader("ADD TIMETABLE");
+		setHeader("ADD TIMETABLE");
 		ttList.add(tt);
 		System.out.println("Timetable added.");
 	}
 	
 	// Get User input and throw to doDelete, return message to user for delete outcomes (Option 3-DELETE) (REVATHI)
 	public static void deleteTimetable(ArrayList<Timetable> ttList) {
-		TimetableMain.setHeader("DELETE TIMETABLE");
-		TimetableMain.viewTimetables(ttList);
+		setHeader("DELETE TIMETABLE");
+		viewTimetables(ttList);
 		
 		String id = Helper.readString("Enter Timetable ID to be deleted > ");
 		boolean matchID = doDeleteTimetable(ttList, id);
