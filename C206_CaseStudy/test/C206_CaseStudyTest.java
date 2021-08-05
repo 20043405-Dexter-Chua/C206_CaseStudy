@@ -58,8 +58,6 @@ public class C206_CaseStudyTest {
 		LocalDateTime end2 = LocalDateTime.of(2019, 3, 28, 21, 00);
 		tt2 = new Timetable("2",120.0, start2, end2,"HBL");
 		
-		
-		
 	}
 	
 	// Timetable Test [Dexter]
@@ -72,15 +70,13 @@ public class C206_CaseStudyTest {
 		// The item just added is the same as the first item of the list
 		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr1);
 		assertEquals("Test if Timetable Registration arraylist size is 1?", 1, regTimetableList.size());	
-		assertSame("Test that Camcorder is added same as 1st item of the list?", ttr1, regTimetableList.get(0));
+		assertSame("Test that Timetable Registration added same as 1st item of the list?", ttr1, regTimetableList.get(0));
 
 		// Add another item. test The size of the list is 2?
 		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr2);
-		assertEquals("Test that Camcorder arraylist size is 2?", 2, regTimetableList.size());
+		assertEquals("Test that arraylist size is 2?", 2, regTimetableList.size());
+		assertSame("Test that Second Registration added same as 2nd item of the list?", ttr2, regTimetableList.get(1)); 
 
-		assertSame("Test that Camcorder is added same as 2nd item of the list?", tt2, regTimetableList.get(1)); 
-
-		assertSame("Test that Camcorder is added same as 2nd item of the list?", ttr2, regTimetableList.get(1));
 	}
 	
 	// View All Registrations [Dexter]
