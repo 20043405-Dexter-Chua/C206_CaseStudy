@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
@@ -20,7 +21,15 @@ public class C206_CaseStudy {
 	private static final int STUDENT_QUIT = 4;
 	
 	private static final ArrayList<StudentInfo> studentList = new ArrayList<StudentInfo>();
-
+	
+	//20006739-Revathi
+	private static final ArrayList<Timetable> ttList = new ArrayList<Timetable>();
+	private static final int VIEW_TIMETABLES = 1;
+	private static final int ADD_TIMETABLE = 2;
+	private static final int DELETE_TIMETABLE = 3;
+	private static final int QUIT = 4;
+		
+	
 	public static void main(String[] args) {
 		// Objects for testing
 		
@@ -36,8 +45,17 @@ public class C206_CaseStudy {
 		tuitionList.add(t1);
 		tuitionList.add(t2);
 		
-		// Objects for tuition timetable
+		// Objects for tuition timetable (REVATHI)
+		LocalDateTime start1 = LocalDateTime.of(2019, 3, 28, 14, 30);
+		LocalDateTime end1 = LocalDateTime.of(2019, 4, 28, 17, 30);
+		Timetable tt1 = new Timetable("1",200.0, start1, end1,"FTF");
 		
+		LocalDateTime start2 = LocalDateTime.of(2019, 2, 28, 18, 00);
+		LocalDateTime end2 = LocalDateTime.of(2019, 3, 28, 21, 00);
+		Timetable tt2 = new Timetable("2",120.0, start2, end2,"HBL");
+		
+		ttList.add(tt1);
+		ttList.add(tt2);
 				
 		// Objects for teacher
 	
@@ -139,11 +157,38 @@ public class C206_CaseStudy {
 						break;
 					}
 				
-
+//20006739-REVATHI--------------------------------------------------------------
 			} else if (option == OPTION_TIMETABLE) {
 				// Manage Tuition Timetable Information
-				
-
+				int doTimetable = 0;
+				while(doTimetable!= QUIT)
+				{
+					timetableMenu();
+					doTimetable = Helper.readInt("Enter an option > ");
+					
+					if (doTimetable == VIEW_TIMETABLES)
+					{
+						viewTimetables(ttList);
+					}
+					else if (doTimetable == ADD_TIMETABLE)
+					{
+						Timetable tt = createTimetable();
+						addTimetable(ttList, tt);
+					}
+					else if (doTimetable == DELETE_TIMETABLE)
+					{
+						deleteTimetable(ttList);
+					}
+					else if (doTimetable == QUIT)
+					{
+						terminate();
+					}
+					else
+					{
+						System.out.println("Invalid option!");
+					}
+				}
+//---------------------------------------------------------------------------------
 			} else if (option == OPTION_TEACHERS) {
 				// Manage Tuition Teachers
 
@@ -441,9 +486,133 @@ public class C206_CaseStudy {
 		}
 	}
 	// ------------------------------------
-	
-	// Manage Tuition Timetable Menu (Option 4)
 
+/**
+ * 20006739-REVATHI Timetable methods 
+ */
+// Manage Tuition Timetable Menu (Option 4) (REVATHI)
+	public static void timetableMenu() {
+		TimetableMain.setHeader("TIMETABLE MANAGER");
+		System.out.println("1. Display Timetables");
+		System.out.println("2. Add Timetable");
+		System.out.println("3. Delete Timetable");
+		System.out.println("4. Quit");
+		Helper.line(80, "-");
+	}
+	
+	// End the program in Timetable sub-menu (Option 4) (REVATHI)
+	private static void terminate() {
+		setHeader("END OF PROGRAM");
+	}
+	
+	// Date formatter dateTime to String  (REVATHI)
+	public static String dateFormat(LocalDateTime dateTime) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE dd-MM-yyyy HHmm");
+		String date = dateTime.format(formatter);
+		return date;
+	}
+	
+	// Retrieve all Timetable objects from Timetable List ttList (Option 1,3) (REVATHI)
+	public static String retrieveAllTimetables(ArrayList<Timetable> ttList) {
+		String output = "";
+		
+		for (int i = 0; i < ttList.size(); i++) {
+		
+			Timetable tt = ttList.get(i);
+			String id = tt.getTimetableID();
+			double price = tt.getPrice();
+			LocalDateTime start = tt.getStartTime();
+			LocalDateTime end = tt.getEndTime();
+			String mode = tt.getMode();
+			
+			output += String.format("%-5s $%-10.2f %-25s %-25s %-5s\n", id,
+					price, dateFormat(start), dateFormat(end),mode);
+		}
+		return output;
+	}
+	// Print Timetables Retrieved in UI designed (Option 1-VIEW) (REVATHI)
+	public static void viewTimetables(ArrayList<Timetable> ttList) {
+		TimetableMain.setHeader("SHOWING ALL TIMETABLES");
+		String output = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
+		output += retrieveAllTimetables(ttList);
+		System.out.println(output);
+	}
+	
+	//To collect LocalDateTime parameters from user input (Option 2-ADD) (REVATHI)
+	private static LocalDateTime inputDateTime() {
+		int year = Helper.readInt("Enter year (YYYY) > ");
+		int mth = Helper.readInt("Enter month (MM) > ");
+		int day = Helper.readInt("Enter day (DD) > ");
+		int hr = Helper.readInt("Enter hour (hh) > ");
+		int mins = Helper.readInt("Enter minute (mm) > ");
+		LocalDateTime dateTime = LocalDateTime.of(year, mth, day, hr, mins); //year,month,day,hour,minute
+		return dateTime;
+	}
+	//Create Timetable instance from User input (Option 2-ADD) (REVATHI)
+	private static Timetable createTimetable() {
+
+		String id = Helper.readString("Enter Timetable ID > ");
+		double price = Helper.readDouble("Enter price of tuition run > $");
+		
+	
+		System.out.println("< Enter Start Date Details > ");
+		LocalDateTime startDateTime = inputDateTime();
+
+		System.out.println("< Enter End Date Details > ");
+		LocalDateTime endDateTime = inputDateTime();
+
+		
+		String mode = Helper.readString("Enter mode (HBL/FTF) > ");
+		Timetable tt = new Timetable(id,price,startDateTime,endDateTime,mode.toUpperCase());
+		return tt;
+	}
+	//Adding Timetable instance to ArrayList of Timetables (Option 2-ADD) (REVATHI)
+	public static void addTimetable(ArrayList<Timetable> ttList, Timetable tt) {
+		
+		TimetableMain.setHeader("ADD TIMETABLE");
+		ttList.add(tt);
+		System.out.println("Timetable added.");
+	}
+	
+	// Get User input and throw to doDelete, return message to user for delete outcomes (Option 3-DELETE) (REVATHI)
+	public static void deleteTimetable(ArrayList<Timetable> ttList) {
+		TimetableMain.setHeader("DELETE TIMETABLE");
+		TimetableMain.viewTimetables(ttList);
+		
+		String id = Helper.readString("Enter Timetable ID to be deleted > ");
+		boolean matchID = doDeleteTimetable(ttList, id);
+
+		if (matchID == false) 
+		{
+			System.out.println("Invalid ID");
+		} 
+		else 
+		{
+			System.out.println("Timetable deleted.");
+		}
+	}
+	// match id from user to id of Timetables in List, delete (true) if match, delete false if no match  (Option 3-DELETE) (REVATHI)
+	public static boolean doDeleteTimetable(ArrayList<Timetable> ttList, String id) {
+		boolean matchID = false;
+
+		for (int i = 0; i < ttList.size(); i++) 
+		{
+			String timetableID = ttList.get(i).getTimetableID();
+
+			if (timetableID.equalsIgnoreCase(id)) 
+			{
+				ttList.remove(i);
+
+				matchID = true;
+			}
+		}
+		return matchID;
+	}
+	
+	
+/**
+ * END for 20006739-REVATHI
+ */
 	// Manage Tuition Teachers Menu (Option 5) JJ
 
 }
