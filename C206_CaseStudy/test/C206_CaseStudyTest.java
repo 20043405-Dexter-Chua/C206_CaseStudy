@@ -158,6 +158,7 @@ public class C206_CaseStudyTest {
 
 	}
 	
+	// Search Timetable Registration [Dexter]
 	@Test
 	public void testSearchTimetableRegistration() {
 		// Boundary Condition
