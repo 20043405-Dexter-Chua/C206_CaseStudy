@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-	// Arraylist Objects [Dexter]
+	// DEXTER
 	private TimetableRegistration ttr1;
 	private TimetableRegistration ttr2;
 	private ArrayList<TimetableRegistration> regTimetableList;
@@ -33,17 +33,17 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp() throws Exception {
 
-		// TuitionTimetable Test [Dexter]
-		ttr1 = new TimetableRegistration(1, 1, "dchua647@gmail.com", "Pending",
-				LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
-		ttr2 = new TimetableRegistration(2, 1, "dtan746@gmail.com", "Pending",
-				LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
-
-		regTimetableList = new ArrayList<TimetableRegistration>();
-
 		// Nicolette
 		s1 = new StudentInfo("Lisa", 'F', 987654321, "123@gmail.com", "1/1/2020", "Singapore");
 		studentList = new ArrayList<StudentInfo>();
+		
+		// TuitionTimetable Test [DEXTER]
+				ttr1 = new TimetableRegistration(1, "1", "dchua647@gmail.com", "Pending",
+						LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
+				ttr2 = new TimetableRegistration(2, "2", "dtan746@gmail.com", "Withdrawed",
+						LocalDateTime.parse("2021-08-04T19:13:39.300360200"));
+
+				regTimetableList = new ArrayList<TimetableRegistration>();
 
 		// ANDERS --- Tuition Information Test Objects
 		test1 = new Tuition("ABC001", "Tuition_Test1", "TestSubject1", "This is for testing", 789,
@@ -66,6 +66,8 @@ public class C206_CaseStudyTest {
 
 	}
 
+//--------20043405-Dexter-Chua--------------------------------------------------------------------------------------------
+	
 	// Timetable Test [Dexter]
 	@Test
 	public void testAddTimetableRegistrations() {
@@ -115,9 +117,9 @@ public class C206_CaseStudyTest {
 
 	// Cancel Registration [Dexter]
 	@Test
-	public void doDeleteTimetableRegistrationTest() {
+	public void testDeleteTimetableRegistration() {
 		// Boundary Condition
-		assertNotNull("Test if there is valid Timetable arraylist to loan from", regTimetableList);
+		assertNotNull("Test if there is valid Timetable arraylist to delete from", regTimetableList);
 
 		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr1);
 		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr2);
@@ -135,7 +137,55 @@ public class C206_CaseStudyTest {
 		assertFalse("Test if a non-existing item is NOT ok to delete.", ok);
 
 	}
+	
+	// Withdraw Timetable Registration [Dexter]
+	@Test
+	public void testWithdrawTimetableRegistration() {
+		// Boundary Condition
+		assertNotNull("Test if there is valid Timetable arraylist to withdraw from", regTimetableList);
 
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr1);
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr2);
+
+		// Normal Condition
+		Boolean ok = C206_CaseStudy.doWithdrawTimetableRegistration(regTimetableList, 1);
+		assertTrue("Test if an available item is ok to withdraw?", ok);
+
+		// Normal Condition
+		String withdrawStatus = "Withdrawed";
+		ok = C206_CaseStudy.doWithdrawTimetableRegistration(regTimetableList, 1);
+		assertTrue("Test if the same item status has changed to 'Withdrawed'", regTimetableList.get(0).getRegStatus().equals(withdrawStatus));
+
+	}
+	
+	@Test
+	public void testSearchTimetableRegistration() {
+		// Boundary Condition
+		assertNotNull("Test if there is valid Timetable arraylist to search from", regTimetableList);
+
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr1);
+		C206_CaseStudy.addTimetableRegistration(regTimetableList, ttr2);
+
+		// Normal Condition
+		String searchReg = "Pending";
+		Boolean ok = C206_CaseStudy.doSearchTimetableRegistration(regTimetableList, searchReg);
+		assertTrue("Test if there are available items to display with registration status 'Pending'", ok);
+
+		// Normal Condition
+		searchReg = "Withdrawed";
+		ok = C206_CaseStudy.doSearchTimetableRegistration(regTimetableList, searchReg);
+		assertTrue("Test if there are available items to display with registration status 'Withdrawed'", ok);
+		
+		// Error Condition
+		searchReg = "Confirmed";
+		ok = C206_CaseStudy.doSearchTimetableRegistration(regTimetableList, searchReg);
+		assertFalse("Test if there are no available items to display with registration status 'Confirmed'", ok);
+
+	}
+	
+	
+//--------20043405-Dexter-Chua--------------------------------------------------------------------------------------------
+	
 	// Student test [Nicolette]-
 	public void addStudentTest() {
 
@@ -196,7 +246,7 @@ public class C206_CaseStudyTest {
 	public void testAddTimetable() {
 		// Timetable list is not null, so that can add a new item
 		assertNotNull("Test if there is valid Timetable ArrayList to add to", ttList);
-
+ 
 		// Given an empty list, after adding 1 Timetable, the size of the list is 1
 		TimetableMain.addTimetable(ttList, tt1);
 		assertEquals("Test if that Timetable arraylist size is 1?", 1, ttList.size());

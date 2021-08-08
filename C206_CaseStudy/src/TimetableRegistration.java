@@ -4,14 +4,14 @@ import java.time.format.DateTimeFormatter;
 
 public class TimetableRegistration {
 	private int regNum;
-	private int timetableID;
+	private String timetableID;
 	private String studentEmail;
 	private String regStatus;
 	private LocalDateTime regDate;
 	
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-	public TimetableRegistration(int regNum, int timetableID, String studentEmail, String regStatus, LocalDateTime regDate) {
+	public TimetableRegistration(int regNum, String timetableID, String studentEmail, String regStatus, LocalDateTime regDate) {
 		this.regNum = regNum;
 		this.timetableID = timetableID;
 		this.studentEmail = studentEmail;
@@ -20,7 +20,7 @@ public class TimetableRegistration {
 	}
 	
 	public String toString() {
-		String tuitionReg = String.format("%-10d %-15d %-30s %-20s %-30s", regNum, timetableID, studentEmail, regStatus, formatter.format(regDate));
+		String tuitionReg = String.format("%-10d %-15s %-30s %-20s %-30s", regNum, timetableID, studentEmail, regStatus, formatter.format(regDate));
 		return tuitionReg;
 	}
 	
@@ -32,11 +32,11 @@ public class TimetableRegistration {
 		this.regNum = regNum;
 	}
 	
-	public int getTimetableID() {
+	public String getTimetableID() {
 		return timetableID;
 	}
 	
-	public void setTimetableID(int timetableID) {
+	public void setTimetableID(String timetableID) {
 		this.timetableID = timetableID;
 	}
 	
