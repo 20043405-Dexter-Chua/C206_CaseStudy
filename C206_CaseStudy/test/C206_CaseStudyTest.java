@@ -29,6 +29,12 @@ public class C206_CaseStudyTest {
 	private Timetable tt1;
 	private Timetable tt2;
 	private ArrayList<Timetable> ttList;
+	
+	// JiaJun
+	private Teacher t1;
+	private Teacher t2;
+	private ArrayList<Teacher> teacherList;
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -63,6 +69,11 @@ public class C206_CaseStudyTest {
 		LocalDateTime start2 = LocalDateTime.of(2019, 2, 28, 18, 00);
 		LocalDateTime end2 = LocalDateTime.of(2019, 3, 28, 21, 00);
 		tt2 = new Timetable("2", 120.0, start2, end2, "HBL");
+		
+		// JiaJun Teacher Test
+		t1 = new Teacher("Alex", 'M', "Alex@rp.edu.sg", "Qualification of Sports", "Sports");
+		t2 = new Teacher("Amy", 'F', "Amy@rp.edu.sg", "Qualification of Music", "Music");
+		teacherList = new ArrayList<Teacher>();
 
 	}
 
@@ -400,6 +411,60 @@ public class C206_CaseStudyTest {
 		assertTrue("Test that Tuition oject 'removed' is not found in the arrayList thus it has been removed",
 				isRemoved);
 	}
+	//----------------------------------------JiaJun--------------------------------------- Teacher Test
+	@Test
+	public void viewAllTeacherTest(){
+		//Normal Test: Test for all teacher display
+		teacherList.add(t1);
+		teacherList.add(t2);
+		assertNotNull("Test that all teachers can be displayed", teacherList);
+		
+		//Boundary Test: Test that there are no duplicates
+		assertNotSame("Test that teachers are not duplicate", t1, teacherList.get(1));
+		
+		//Normal Test: Test that the size of the list is 2
+		assertEquals("Test that teacher arraylist size is 1", 2, teacherList.size());
+	}
+	
+	@Test
+	public void addTeacherTest() {
+		//Normal Test: Test that after adding a teacher, the size should be 1
+		teacherList.add(t1);
+		assertEquals("Test that teacher successfully added", 1, teacherList.size());
+		teacherList.remove(t1);
+		
+		//Boundary Test: Test that the email for new teacher is not same to other teachers
+		teacherList.add(t1);
+		teacherList.add(t2);
+		assertNotSame("Test that teachers are not duplicate", t1.getEmail(), teacherList.get(1).getEmail());
+		teacherList.remove(t1);
+		teacherList.remove(t2);
+		
+		//Normal Test: Test that information for teacher is all filled
+		teacherList.add(t1);
+		assertNotNull("Test that all teachers can be displayed", teacherList.get(0).getEmail());
+		teacherList.remove(t1);
+	}
+	
+	@Test
+	public void deleteTeacherTest() {
+		//Normal Test: Test that the teacher is deleted successfully
+		teacherList.add(t1);
+		teacherList.remove(t1);
+		assertEquals("Test that teacher successfully deleted", 0, teacherList.size());
+		
+		//Boundary Test: Test that no teacher will be remove when the delete is invalid
+		teacherList.add(t2);
+		teacherList.remove(t1);
+		assertEquals("Test that no teacher has been deleted arraysize remains the same", 1, teacherList.size());
+		
+		//Error Test: Test that one teacher can only be deleted once
+		teacherList.add(t1);
+		teacherList.remove(t1);
+		teacherList.remove(t1);
+		assertNotSame("Test that one teacher can only be deleted once", t1, teacherList.get(0));
+	}
+	
 
 	@After
 	public void tearDown() throws Exception {
@@ -423,6 +488,11 @@ public class C206_CaseStudyTest {
 		tt1 = null;
 		tt2 = null;
 		ttList = null;
+		
+		// Teacher Test [JiaJun]
+		t1 = null;
+		t2 = null;
+		teacherList = null;
 
 	}
 

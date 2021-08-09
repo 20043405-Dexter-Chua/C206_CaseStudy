@@ -43,6 +43,13 @@ public class C206_CaseStudy {
 	private static final int ADD_TIMETABLE = 2;
 	private static final int DELETE_TIMETABLE = 3;
 	private static final int QUIT = 4;
+	
+	// 20013886-ZhangJiaJun
+	private static final ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
+	private static final int VIEW_ALL_TEACHERS = 1;
+	private static final int ADD_TEACHER = 2;
+	private static final int DELETE_TEACHER = 3;
+	private static final int EXIT = 4;
 
 	public static void main(String[] args) {
 		// Objects for testing
@@ -73,6 +80,8 @@ public class C206_CaseStudy {
 		ttList.add(tt2);
 
 		// Objects for teacher
+		teacherList.add(new Teacher("Anna" , 'F', "12345@rp.edu.sg", "Qualification Of InfoCom", "Programming"));
+		teacherList.add(new Teacher("Lucas", 'M', "54321@rp.edu.sg", "Qualification Of InfoCom", "Programming"));
 
 		int option = -1;
 
@@ -201,9 +210,24 @@ public class C206_CaseStudy {
 						System.out.println("Invalid option!");
 					}
 				}
-//---------------------------------------------------------------------------------
+//20013886-Zhang-JiaJun----------------------------------------------------------
 			} else if (option == OPTION_TEACHERS) {
 				// Manage Tuition Teachers
+				int TeacherOption = 0;
+				while (TeacherOption != EXIT) {
+					TeacherMenu();
+					TeacherOption = Helper.readInt("Enter An Option:  ");
+					
+					if(TeacherOption == VIEW_ALL_TEACHERS) {
+						viewAllTeachers(teacherList);
+					}
+					else if (TeacherOption == ADD_TEACHER) {
+						addNewTeacher(teacherList);
+					}
+					else if (TeacherOption == DELETE_TEACHER){
+						deleteTeacher(teacherList);
+					}
+				}
 
 			} else if (option == OPTION_QUIT) {
 				// End Session || Close Application
@@ -811,6 +835,78 @@ public class C206_CaseStudy {
 	/**
 	 * END for 20006739-REVATHI
 	 */
-	// Manage Tuition Teachers Menu (Option 5) JJ
+	// Manage Tuition Teachers Menu (Option 5) JiaJun
+	//--Menu
+	public static void TeacherMenu() {
+		setHeader("TEACHER MANAGER");
+		Helper.line(120, "=");
+		System.out.println("1. View All Teachers");
+		System.out.println("2. Add New Teacher");
+		System.out.println("3. Delete A Teacher");
+		System.out.println("4. Exit");
+		Helper.line(120, "=");
+	}
+	//--View All Teachers - Option 1(JiaJun)
+	public static void viewAllTeachers(ArrayList<Teacher>TeacherList) {
+		String output = String.format("%-15s %-10s %-20s %-30s %-30s\n" , "NAME", "GENDER",
+				"EMAIL", "QUALIFICATION", "SUBJECT_GROUP");
+		for (int i =0; i < TeacherList.size(); i++) {
+			output += String.format("%-15s %-10c %-20s %-30s %-30s\n", TeacherList.get(i).getName(), TeacherList.get(i).getGender(),
+					TeacherList.get(i).getEmail(), TeacherList.get(i).getQualification(), TeacherList.get(i).getSubject_group());
+		}
+		System.out.println(output);
+	}
+	//--Add New Teacher - Option 2(JiaJun)
+	public static void addNewTeacher(ArrayList<Teacher>teacherList) {
+		boolean isDuplicate = false;
+		String tName = Helper.readString("Enter Name For This Teacher: ");
+		char tGender = Helper.readChar("Enter Gender For This Teacher: ");
+		String tEmail = Helper.readString("Enter Email For This Teacher: ");
+		String tQualification = Helper.readString("Enter Qualification For This Teacher: ");
+		String tSubjectGroup = Helper.readString("Enter Subject Group For This Teacher: ");
+		if (tName != null && tGender != ' ' && tEmail != null && tQualification != null && tSubjectGroup != null) {
+			for (int i = 0; i < teacherList.size(); i++) {
+				if (teacherList.get(i).getEmail().equals(tEmail)) {
+					isDuplicate = true;
+				}else {
+					isDuplicate = false;
+				}
+			} if (isDuplicate == false) {
+				Teacher nTeacher  = new Teacher(tName, tGender, tEmail, tQualification, tSubjectGroup);
+				teacherList.add(nTeacher);
+			}else {
+				System.out.println("Duplicate email! Please try again!");
+			}
+		}else {
+			System.out.println("Please ensure all information is filled in!");
+		}
+	}
+	//Delete Teacher - Option 3(JiaJun)
+	public static void deleteTeacher(ArrayList<Teacher>teacherList) {
+		setHeader("DELETE TIMETABLE");
+		viewAllTeachers(teacherList);
 
+		String dEmail = Helper.readString("Enter email to delete respective teacher: ");
+		boolean emailExist = deleteTeacherTrue(teacherList, dEmail);
+
+		if (emailExist == false) {
+			System.out.println("Email Not Found! Please enter again");
+		} else {
+			System.out.println("This teacher has been successfully deleted");
+		}
+	}
+	public static boolean deleteTeacherTrue(ArrayList<Teacher> teacherList, String dEmail) {
+		boolean isFound = false;
+
+		for (int i = 0; i < teacherList.size(); i++) {
+			String actualEmail = teacherList.get(i).getEmail();
+
+			if (actualEmail.equalsIgnoreCase(dEmail)) {
+				teacherList.remove(i);
+
+				isFound = true;
+			}
+		}
+		return isFound;
+	}
 }
