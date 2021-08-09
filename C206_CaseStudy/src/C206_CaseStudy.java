@@ -944,6 +944,7 @@ public class C206_CaseStudy {
 			System.out.println("This teacher has been successfully deleted");
 		}
 	}
+	//JiaJun
 	public static boolean deleteTeacherTrue(ArrayList<Teacher> teacherList, String dEmail) {
 		boolean isFound = false;
 
