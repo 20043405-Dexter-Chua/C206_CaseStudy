@@ -62,7 +62,7 @@ public class C206_CaseStudy {
 
 		// Objects for tuition registration (DEXTER)
 		regTimetableList.add(new TimetableRegistration(1, "1", "20043405@rp.edu.sg", "Pending", LocalDateTime.parse("2021-08-04T19:13:39.300360200")));
-		regTimetableList.add(new TimetableRegistration(1, "2", "20043406@rp.edu.sg", "Withdrawed", LocalDateTime.parse("2021-08-04T19:13:39.300360200")));
+		regTimetableList.add(new TimetableRegistration(2, "2", "20043406@rp.edu.sg", "Withdrawed", LocalDateTime.parse("2021-08-04T19:13:39.300360200")));
 
 		// Objects for tuition information (ANDERS)
 		t1 = new Tuition("ABC001", "Tuition_Test1", "SubjectGroup1", "This is for testing", 123, "Pre Requisite");
