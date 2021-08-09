@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+//-------------Done By Dexter Chua--------------//
 public class TimetableRegistration {
 	private int regNum;
 	private String timetableID;
@@ -65,5 +66,5 @@ public class TimetableRegistration {
 	}	
 
 }
-
+//-------------Done By Dexter Chua--------------//
 

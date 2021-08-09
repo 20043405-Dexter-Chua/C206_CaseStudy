@@ -153,16 +153,20 @@ public class C206_CaseStudy {
 					C206_CaseStudy.deleteTimetableRegistration(regTimetableList);
 
 				} else if (registerType == TIMETABLE_WITHDRAW) {
+					// Withdraw Tuition Registration [Dexter]
 					C206_CaseStudy.withdrawTimeTableRegistration(regTimetableList);
 
 				} else if (registerType == TIMETABLE_SEARCH) {
+					// Search Tuition Registration [Dexter]
 					C206_CaseStudy.registerStatusTypes();
 					C206_CaseStudy.searchTimetableRegistrations(regTimetableList);
 
 				} else if (registerType == TIMETABLE_QUIT) {
+					// Quit Tuition Registration Menu [Dexter]
 					C206_CaseStudy.setHeader("LEAVING REGISTRATIONS MENU");
 					System.out.println("Returning to Main Menu.");
 				} else {
+					// Invalid Option [Dexter]
 					System.out.println("Invalid Option, Please Enter a Valid Option (1-6)!");
 				}
 
