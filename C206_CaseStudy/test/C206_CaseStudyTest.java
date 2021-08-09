@@ -260,14 +260,14 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is valid Timetable ArrayList to add to", ttList);
  
 		// Given an empty list, after adding 1 Timetable, the size of the list is 1
-		TimetableMain.addTimetable(ttList, tt1);
+		C206_CaseStudy.addTimetable(ttList, tt1);
 		assertEquals("Test if that Timetable arraylist size is 1?", 1, ttList.size());
 
 		// The Timetable just added is as same as the first Timetable of the list
 		assertSame("Test that Timetable added is 1st item of the list?", tt1, ttList.get(0));
 
 		// Add another Timetable. test The size of the list is 2?
-		TimetableMain.addTimetable(ttList, tt2);
+		C206_CaseStudy.addTimetable(ttList, tt2);
 		assertEquals("Test that Timetable arraylist size is 2?", 2, ttList.size());
 		assertSame("Test that Timetable added is 2nd item of the list?", tt2, ttList.get(1));
 	}
@@ -280,21 +280,21 @@ public class C206_CaseStudyTest {
 
 		// test if the list of Timetables retrieved from the TimetableManager is empty -
 		// boundary
-		String timetables = TimetableMain.retrieveAllTimetables(ttList);
+		String timetables = C206_CaseStudy.retrieveAllTimetables(ttList);
 		String testOutput = "";
 		assertEquals("Check no timetables inside list", testOutput, timetables);
 
 		// Given an empty list, after adding 2 items, test if the size of the list is 2
 		// - normal
-		TimetableMain.addTimetable(ttList, tt1);
+		C206_CaseStudy.addTimetable(ttList, tt1);
 		assertEquals("Test that timetable arraylist size is 1", 1, ttList.size());
 
 		// test if the expected output string same as the list of timetables retrieved
 		// from TimetableManager
-		timetables = TimetableMain.retrieveAllTimetables(ttList);
+		timetables = C206_CaseStudy.retrieveAllTimetables(ttList);
 
-		String S1 = TimetableMain.dateFormat(LocalDateTime.of(2019, 3, 28, 14, 30));
-		String E1 = TimetableMain.dateFormat(LocalDateTime.of(2019, 4, 28, 17, 30));
+		String S1 = C206_CaseStudy.dateFormat(LocalDateTime.of(2019, 3, 28, 14, 30));
+		String E1 = C206_CaseStudy.dateFormat(LocalDateTime.of(2019, 4, 28, 17, 30));
 		testOutput = String.format("%-5s $%-10.2f %-25s %-25s %-5s\n", "1", 200.0, S1, E1, "FTF");
 
 		assertEquals("Test output for RetrieveTimetables()", testOutput, timetables);
@@ -308,18 +308,44 @@ public class C206_CaseStudyTest {
 
 		// Given an empty list, after adding 2 items, test if the size of the list is 2
 		// - normal
-		TimetableMain.addTimetable(ttList, tt1);
-		TimetableMain.addTimetable(ttList, tt2);
+		C206_CaseStudy.addTimetable(ttList, tt1);
+		C206_CaseStudy.addTimetable(ttList, tt2);
 		assertEquals("Test that timetable arraylist size is 2", 2, ttList.size());
 
 		// test delete- Size must be 1 after deleting 1 item
-		TimetableMain.doDeleteTimetable(ttList, "1");
+		C206_CaseStudy.doDeleteTimetable(ttList, "1");
 		assertEquals("Test that timetable arraylist size is 1", 1, ttList.size());
 
 		// test delete- item inside Timetable ArrayList should only be tt2
 		assertNotSame("Test that timetable left in ArrayList is not tt1", tt1, ttList.get(0));
 
 	}
+	@Test // REVATHI -SPRINT 2
+	public void testSearchTimetableMode() {
+		// Test if Timetable list is not null but empty - boundary
+		assertNotNull("Test if there is valid Timetable arraylist to retrieve item from", ttList);
+		
+		//test the samples that the list will have"FTF" and "HBL" Timetables inside
+		assertSame("Test that there is FTF Timetable in list","FTF",tt1.getMode());
+		assertSame("Test that there is HBL Timetable in list","HBL",tt2.getMode());
+		
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		// - normal
+		C206_CaseStudy.addTimetable(ttList, tt1);
+		C206_CaseStudy.addTimetable(ttList, tt2);
+		assertEquals("Test that timetable arraylist size is 2", 2, ttList.size());
+		
+		//Test doSearchMode() to see if expected output is same as actual output
+		String S1 = C206_CaseStudy.dateFormat(LocalDateTime.of(2019, 3, 28, 14, 30));
+		String E1 = C206_CaseStudy.dateFormat(LocalDateTime.of(2019, 4, 28, 17, 30));
+		String testOutput = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
+		testOutput+= String.format("%-5s $%-10.2f %-25s %-25s %-5s\n", "1", 200.0, S1, E1, "FTF");
+		
+		String actual = C206_CaseStudy.doSearchMode(ttList,"FTF");
+		//Output from method must be same as expected testOutput
+		assertEquals("Test output for doSearchMode()", testOutput, actual);
+	}
+	
 //-----------------------------------------------------------------------------------------------------------------	
 
 	// --------------- ANDERS --------------

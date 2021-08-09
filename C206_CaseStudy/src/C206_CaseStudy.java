@@ -42,7 +42,10 @@ public class C206_CaseStudy {
 	private static final int VIEW_TIMETABLES = 1;
 	private static final int ADD_TIMETABLE = 2;
 	private static final int DELETE_TIMETABLE = 3;
-	private static final int QUIT = 4;
+	private static final int SEARCH_TIMETABLE_MODE = 4;
+	private static final int QUIT = 5;
+	private static final int FTF = 1;
+	private static final int HBL = 2;
 	
 	// 20013886-ZhangJiaJun
 	private static final ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
@@ -204,7 +207,9 @@ public class C206_CaseStudy {
 						addTimetable(ttList, tt);
 					} else if (doTimetable == DELETE_TIMETABLE) {
 						deleteTimetable(ttList);
-					} else if (doTimetable == QUIT) {
+					} else if (doTimetable ==SEARCH_TIMETABLE_MODE) {
+						searchTimetableMode(ttList);
+					}else if (doTimetable == QUIT) {
 						terminate();
 					} else {
 						System.out.println("Invalid option!");
@@ -719,13 +724,14 @@ public class C206_CaseStudy {
 		System.out.println("1. Display Timetables");
 		System.out.println("2. Add Timetable");
 		System.out.println("3. Delete Timetable");
-		System.out.println("4. Quit");
+		System.out.println("4. Search Timetable By Mode");
+		System.out.println("5. Quit");
 		Helper.line(80, "-");
 	}
 
 	// End the program in Timetable sub-menu (Option 4) (REVATHI)
 	private static void terminate() {
-		setHeader("END OF PROGRAM");
+		setHeader("END OF TUITION TIMETABLE SUB-MENU");
 	}
 
 	// Date formatter dateTime to String (REVATHI)
@@ -830,6 +836,45 @@ public class C206_CaseStudy {
 			}
 		}
 		return matchID;
+	}
+	//Menu to select mode search filter (Option 4-SEARCH MODE) (REVATHI)----SPRINT 2--------
+	public static void timetableModeMenu() {
+		setHeader("TIMETABLE MODE TO SEARCH");
+		System.out.println("1. FTF");
+		System.out.println("2. HBL");
+		Helper.line(80, "-");
+	}
+	//Print Mode Search Results (Option 4-SEARCH MODE) (REVATHI)----SPRINT 2--------
+	public static void searchTimetableMode (ArrayList<Timetable> ttList) {
+		timetableModeMenu();
+		int selection = Helper.readInt("Enter Tuition Mode to Search For > ");
+		String output = "";
+		if (selection == FTF) {
+			output+= doSearchMode(ttList,"FTF");
+		}else if (selection == HBL) {
+			output+= doSearchMode(ttList,"HBL");
+		}else {
+			output += "INVALID OPTION SELECTED"; 
+		}
+		System.out.println(output);
+		
+	}
+	//Retrieve Mode Search (Option 4-SEARCH MODE) (REVATHI)----SPRINT 2--------
+	public static String doSearchMode(ArrayList<Timetable> ttList, String searchMode) {
+		String output = String.format("%-5s %-10s %-25s %-25s %-5s\n", "ID", "PRICE", " START", " END", " MODE");
+		
+		for (Timetable t : ttList) {
+			String id = t.getTimetableID();
+			double price = t.getPrice();
+			LocalDateTime start = t.getStartTime();
+			LocalDateTime end = t.getEndTime();
+			String mode = t.getMode();
+			
+			if(mode.equals(searchMode))
+			output += String.format("%-5s $%-10.2f %-25s %-25s %-5s\n", id, price, dateFormat(start), dateFormat(end),
+					mode);
+		}		
+		return output;
 	}
 
 	/**
